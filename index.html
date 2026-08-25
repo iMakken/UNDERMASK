@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNDERMASK — You are not statistics</title>
+    <title>UNDERMASK</title>
+    <!-- Строгий моноширинный шрифт в стиле tech-minimalism -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
@@ -13,7 +14,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* Кастомный курсор nncnc */
+            cursor: none; /* Кастомный бруталистский курсор */
         }
 
         body {
@@ -23,10 +24,10 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        /* Тонкая сетка-лейаут */
+        /* Тонкая индустриальная сетка-лейаут */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr;
@@ -37,6 +38,7 @@
             position: relative;
         }
 
+        /* Верхняя панель */
         header {
             display: flex;
             justify-content: space-between;
@@ -49,7 +51,7 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.4);
             display: flex;
             align-items: center;
             gap: 8px;
@@ -58,132 +60,73 @@
         .status-dot {
             width: 6px;
             height: 6px;
-            background-color: #d6a4e8; /* Лавандово-розовый из логотипа */
+            background-color: #CC96E6; /* Точный цвет из вашего логотипа */
             border-radius: 50%;
-            box-shadow: 0 0 8px #d6a4e8;
+            box-shadow: 0 0 10px #CC96E6;
         }
 
+        /* Центр страницы */
         main {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
             padding: 60px 40px;
-            max-width: 900px;
+            max-width: 850px;
         }
 
+        /* Логотип в вашем фирменном цвете */
         .logo {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
             font-size: clamp(2.5rem, 8vw, 5.5rem);
             letter-spacing: -0.02em;
             text-transform: uppercase;
-            color: #ffffff;
-            margin-bottom: 16px;
-            line-height: 0.9;
-        }
-
-        /* Слоган из спецификации */
-        .slogan {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            font-weight: 500;
-            color: #d6a4e8;
+            color: #CC96E6; /* Оригинальный цвет из файла */
             margin-bottom: 24px;
-            letter-spacing: -0.02em;
+            line-height: 0.9;
+            text-shadow: 0 0 40px rgba(204, 150, 230, 0.15);
         }
 
-        /* Описание сути продукта */
+        /* Главный лозунг бренда */
+        .slogan {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+            border-left: 2px solid #CC96E6;
+            padding-left: 16px;
+        }
+
+        /* Текст манифеста без карт и спойлеров к механике */
         .manifesto {
-            font-size: clamp(1rem, 2vw, 1.15rem);
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
             font-weight: 300;
             line-height: 1.7;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 48px;
-            max-width: 720px;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 650px;
+            margin-bottom: 40px;
         }
 
         .manifesto bold {
             color: #ffffff;
-            font-weight: 500;
-        }
-
-        /* Интерактивный блок «Слепого вопроса» (Демо механики) */
-        .demo-box {
-            width: 100%;
-            max-width: 550px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 32px;
-            position: relative;
-            background: rgba(255, 255, 255, 0.01);
-        }
-
-        .demo-title {
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.4);
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            letter-spacing: 0.05em;
-        }
-
-        .question {
-            font-size: 1.1rem;
             font-weight: 400;
-            margin-bottom: 24px;
-            line-height: 1.5;
         }
 
-        .options-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        /* Минималистичный интерактивный маркер ожидания */
+        .coming-soon-badge {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #CC96E6;
+            padding: 8px 16px;
+            border: 1px solid rgba(204, 150, 230, 0.2);
+            display: inline-block;
+            background: rgba(204, 150, 230, 0.02);
         }
 
-        .option-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 14px 20px;
-            text-align: left;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .option-btn:hover {
-            border-color: #d6a4e8;
-            color: #d6a4e8;
-        }
-
-        /* Стили для раскрытия процентов после ответа */
-        .result-bar {
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            background: rgba(214, 164, 232, 0.08);
-            width: 0;
-            transition: width 1s cubic-bezier(0.1, 0.8, 0.3, 1);
-            z-index: 1;
-        }
-
-        .option-text {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .percentage {
-            display: none;
-            font-weight: 700;
-            color: #d6a4e8;
-        }
-
-        /* Подвал */
+        /* Нижняя панель */
         footer {
             display: flex;
             justify-content: space-between;
@@ -193,11 +136,11 @@
             color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Инвертирующий курсор */
+        /* Фирменный инвертирующий курсор */
         #custom-cursor {
             width: 12px;
             height: 12px;
-            background-color: #d6a4e8;
+            background-color: #CC96E6;
             position: fixed;
             transform: translate(-50%, -50%);
             pointer-events: none;
@@ -207,8 +150,8 @@
         }
 
         body.clickable-hover #custom-cursor {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             background-color: #ffffff;
         }
 
@@ -218,7 +161,6 @@
             .grid-container { margin: 8px; }
             main { padding: 40px 20px; }
             header, footer { padding: 16px; }
-            .demo-box { padding: 20px; }
         }
     </style>
 </head>
@@ -230,53 +172,34 @@
         
         <header>
             <div class="status-tag">
-                <span class="status-dot"></span> undermask.app — active project
+                <span class="status-dot"></span> undermask.app — encrypted space
             </div>
-            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">[ Anonymous / No Accounts ]</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">[ Zero Data Harvesting ]</div>
         </header>
 
         <main>
+            <!-- Название в оригинальном цвете -->
             <h1 class="logo" onmouseenter="addHover()" onmouseleave="removeHover()">UNDERMASK</h1>
+            
+            <!-- Интригующий манифест без раскрытия механики вопросов -->
             <div class="slogan">“You are not statistics — you are a person.”</div>
             
             <div class="manifesto">
-                An application that shows your place in society. Take off your social mask, step out of your name and face. 
-                Answer short questions completely <bold>blindly and anonymously</bold>. Only after you answer, you see how many people stand with you, and how many look the other way. There is no right answer here.
+                An application designed to show your true alignment within society. By shedding social expectations, names, and faces, you step into a space of absolute anonymity. Because <bold>under the mask, you are real</bold>.
             </div>
-            
-            <!-- Демо-интерфейс «Слепого вопроса» -->
-            <div class="demo-box" id="demoBox">
-                <div class="demo-title" id="boxTitle">[ Interactive Demo ]</div>
-                <div class="question" id="qText">Do you act differently when you know no one is watching?</div>
-                
-                <div class="options-group">
-                    <button class="option-btn" onclick="submitAnswer(this, 73)" onmouseenter="addHover()" onmouseleave="removeHover()">
-                        <div class="result-bar" id="bar1"></div>
-                        <div class="option-text">
-                            <span>Yes, completely.</span>
-                            <span class="percentage" id="pct1">73%</span>
-                        </div>
-                    </button>
-                    <button class="option-btn" onclick="submitAnswer(this, 27)" onmouseenter="addHover()" onmouseleave="removeHover()">
-                        <div class="result-bar" id="bar2"></div>
-                        <div class="option-text">
-                            <span>No, I stay the same.</span>
-                            <span class="percentage" id="pct2">27%</span>
-                        </div>
-                    </button>
-                </div>
-            </div>
+
+            <div class="coming-soon-badge">[ Phase 0.1 — To Be Revealed ]</div>
         </main>
 
         <footer>
-            <div>© 2026 UNDERMASK. Built for alignment.</div>
-            <div>[ UNDER THE MASK YOU ARE REAL ]</div>
+            <div>© 2026 UNDERMASK. No tracking. No compromise.</div>
+            <div>[ DISCOVER YOUR PLACE ]</div>
         </footer>
 
     </div>
 
     <script>
-        // Движение курсора nncnc
+        // Скрипт кастомного курсора nncnc
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
@@ -285,18 +208,6 @@
 
         function addHover() { document.body.classList.add('clickable-hover'); }
         function removeHover() { document.body.classList.remove('clickable-hover'); }
-
-        // Логика слепого ответа и анимации раскрытия процентов
-        function submitAnswer(clickedBtn, targetPct) {
-            // Отключаем клики по кнопкам после выбора
-            const buttons = document.querySelectorAll('.option-btn');
-            buttons.forEach(btn => btn.removeAttribute('onclick'));
-            
-            // Меням заголовок плашки
-            document.getElementById('boxTitle').innerText = "[ Your alignment revealed ]";
-            
-            // Показываем проценты
-            document.getElementById('pct1').style.display = 'block';
-            document.getElementById('pct2').style.display = 'block';
-            
-            // Запускаем заполнение графиков (проценты из вызова функции)
+    </script>
+</body>
+</html>
