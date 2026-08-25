@@ -4,53 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNDERMASK — IN DEVELOPMENT</title>
-    <!-- Подключаем чистый системный шрифт SF Pro (через системные алиасы) и JetBrains Mono для интерфейса -->
+    <!-- Подключаем оригинальный шрифт Deltapi Gothic One (Dela Gothic One) и JetBrains Mono -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
-        /* Обнуление и жесткая швейцарская сетка */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* Кастомный моно-курсор nncnc */
+            cursor: none; /* Интерактивный моно-курсор nncnc */
         }
 
         html, body {
-            background-color: #000000; /* Идеально черный OLED фон вместо серого */
+            background-color: #000000; /* Глубокий черный фон */
             color: #ffffff;
-            /* Использование оригинального шрифта Apple (SF Pro Display) */
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             min-height: 100vh;
             overflow: hidden;
         }
 
-        /* Тонкие премиальные линии-границы в стиле nncnc.app */
+        /* Тонкие бруталистские линии сетки nncnc.app */
         .grid-layout {
             display: grid;
             grid-template-columns: 1fr;
-            grid-template-rows: 80px 1fr 80px;
+            grid-template-rows: 80px 1fr auto;
             min-height: 100vh;
             border: 1px solid rgba(255, 255, 255, 0.04);
             margin: 24px;
             position: relative;
         }
 
-        /* Навигационная панель / Хэдер */
+        /* Верхняя панель */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 40px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
             letter-spacing: 0.08em;
         }
 
-        /* Двухцветный блок IN DEVELOPMENT */
+        /* Блок IN DEVELOPMENT: Сверка по референсу (Точка — C69DC8, Слово — E583EA) */
         .status-container {
             display: flex;
             align-items: center;
@@ -60,12 +57,12 @@
         .status-dot {
             width: 5px;
             height: 5px;
-            background-color: #E583EA; /* Точка первого цвета */
+            background-color: #C69DC8; /* Насыщенная лаванда */
             border-radius: 50%;
         }
 
         .status-text {
-            color: #C69DC8; /* Текст второго цвета */
+            color: #E583EA; /* Светлая розовая лаванда */
             font-weight: 500;
         }
 
@@ -73,75 +70,81 @@
             color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Центрированная композиция с жесткой архитектурой текста (Apple Pro дизайн) */
+        /* Главная контентная область */
         main {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
             padding: 0 80px;
-            max-width: 1000px;
+            max-width: 1100px;
         }
 
-        /* Логотип строго по переданным HEX-кодам */
+        /* Логотип: Шрифт Dela Gothic One + Строгий подбор цветов по картинке */
         .logo {
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            font-weight: 800;
-            letter-spacing: -0.04em; /* Фирменное эппловское сжатие букв */
-            text-transform: uppercase;
+            font-family: 'Dela Gothic One', sans-serif;
+            font-size: clamp(2.2rem, 7vw, 5.2rem);
             line-height: 1.0;
-            margin-bottom: 56px;
+            margin-bottom: 48px;
+            text-transform: uppercase;
         }
 
+        /* Сверяемся с референсом: UNDER — насыщенный (C69DC8), MASK — светлый (E583EA) */
         .logo-under {
-            color: #E583EA; /* Первый цвет */
+            color: #C69DC8;
         }
 
         .logo-mask {
-            color: #C69DC8; /* Второй цвет */
+            color: #E583EA;
         }
 
-        /* Блок манифеста: типографика как на презентациях Mac Studio */
+        /* Блок манифеста */
         .manifesto-block {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 20px;
         }
 
-        /* Сильный, контрастный лозунг */
         .slogan {
-            font-size: clamp(1.4rem, 2.8vw, 2.2rem);
-            font-weight: 600;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-weight: 400;
             color: #ffffff;
             letter-spacing: -0.02em;
-            line-height: 1.25;
+            line-height: 1.3;
             max-width: 750px;
         }
 
-        /* Ультра-лаконичное описание, отделенное пространством */
         .description {
-            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            font-size: clamp(0.95rem, 1.6vw, 1.1rem);
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.4); /* Эффект приглушенного текста Apple */
+            color: rgba(255, 255, 255, 0.4);
             line-height: 1.6;
-            letter-spacing: -0.01em;
-            max-width: 640px;
+            max-width: 620px;
         }
 
-        /* Нижняя панель */
+        /* Футер со строгой структурой копирайта */
         footer {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
+            flex-direction: column;
+            gap: 12px;
+            padding: 32px 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
-            font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
             color: rgba(255, 255, 255, 0.25);
             letter-spacing: 0.05em;
         }
 
-        /* Кастомный монохромный инвертирующий курсор */
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .credits {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Кастомный курсор */
         #custom-cursor {
             width: 10px;
             height: 10px;
@@ -160,14 +163,16 @@
             background-color: #ffffff;
         }
 
-        /* Адаптивность без ломания сетки */
+        /* Адаптив под тач-устройства */
         @media (max-width: 768px) {
             * { cursor: auto; }
             #custom-cursor { display: none; }
-            .grid-layout { margin: 12px; grid-template-rows: 64px 1fr 64px; }
-            header, footer { padding: 0 20px; }
-            main { padding: 0 24px; }
-            .logo { margin-bottom: 40px; }
+            .grid-layout { margin: 12px; grid-template-rows: 64px 1fr auto; }
+            header { padding: 0 20px; }
+            main { padding: 48px 24px; }
+            footer { padding: 24px 20px; }
+            .logo { margin-bottom: 32px; }
+            .footer-top { flex-direction: column; align-items: flex-start; gap: 8px; }
         }
     </style>
 </head>
@@ -179,6 +184,7 @@
         
         <header>
             <div class="status-container">
+                <!-- Точка насыщенная, слово светлое -->
                 <span class="status-dot"></span>
                 <span class="status-text">IN DEVELOPMENT</span>
             </div>
@@ -186,12 +192,11 @@
         </header>
 
         <main>
-            <!-- Логотип собран строго на предоставленных HEX кодах -->
+            <!-- Логотип: Шрифт Dela Gothic One. UNDER — #C69DC8, MASK — #E583EA -->
             <h1 class="logo" onmouseenter="addHover()" onmouseleave="removeHover()">
                 <span class="logo-under">UNDER</span><span class="logo-mask">MASK</span>
             </h1>
             
-            <!-- Чистая швейцарская иерархия текста -->
             <div class="manifesto-block">
                 <div class="slogan">“You are not statistics — you are a person.”</div>
                 <p class="description">
@@ -201,8 +206,13 @@
         </main>
 
         <footer>
-            <div>[ ZERO DATA HARVESTING ]</div>
-            <div>PHASE 0.1</div>
+            <div class="footer-top">
+                <div class="credits">Designed and coded by iMakken</div>
+                <div>PHASE 0.1</div>
+            </div>
+            <div style="color: rgba(255, 255, 255, 0.15);">
+                © 2026 UNDERMASK Lab. All rights reserved.
+            </div>
         </footer>
 
     </div>
