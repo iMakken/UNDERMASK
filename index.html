@@ -163,6 +163,30 @@
             background-color: #ffffff;
         }
 
+.announcement-banner {
+    background-color: #111112; /* Чуть светлее глубокого черного */
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+.announcement-banner a {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-block;
+}
+.announcement-banner a span {
+    color: var(--accent); /* Подсветим слово Telegram неоновым */
+    font-weight: 600;
+}
+.announcement-banner a:hover {
+    color: var(--accent);
+}
+
+        
         /* Адаптив под тач-устройства */
         @media (max-width: 768px) {
             * { cursor: auto; }
