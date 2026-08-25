@@ -3,148 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNDERMASK — In Development</title>
-    <!-- Подключаем строгий моноширинный JetBrains и плотный премиальный Inter -->
+    <title>UNDERMASK — IN DEVELOPMENT</title>
+    <!-- Подключаем чистый системный шрифт SF Pro (через системные алиасы) и JetBrains Mono для интерфейса -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Inter:wght@900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <style>
+        /* Обнуление и жесткая швейцарская сетка */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* Кастомный курсор */
+            cursor: none; /* Кастомный моно-курсор nncnc */
         }
 
-        body {
-            background-color: #1a1a1a; /* Точный графитовый фон из вашей картинки */
+        html, body {
+            background-color: #000000; /* Идеально черный OLED фон вместо серого */
             color: #ffffff;
-            font-family: 'JetBrains Mono', monospace;
+            /* Использование оригинального шрифта Apple (SF Pro Display) */
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             overflow: hidden;
         }
 
-        /* Тонкая сетка-каркас */
-        .grid-container {
+        /* Тонкие премиальные линии-границы в стиле nncnc.app */
+        .grid-layout {
             display: grid;
             grid-template-columns: 1fr;
-            grid-template-rows: auto 1fr auto;
+            grid-template-rows: 80px 1fr 80px;
             min-height: 100vh;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            margin: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin: 24px;
             position: relative;
         }
 
+        /* Навигационная панель / Хэдер */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.08em;
         }
 
-        .status-tag {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: #cc96e6;
+        /* Двухцветный блок IN DEVELOPMENT */
+        .status-container {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 500;
+            gap: 10px;
         }
 
         .status-dot {
-            width: 6px;
-            height: 6px;
-            background-color: #cc96e6;
+            width: 5px;
+            height: 5px;
+            background-color: #E583EA; /* Точка первого цвета */
             border-radius: 50%;
         }
 
+        .status-text {
+            color: #C69DC8; /* Текст второго цвета */
+            font-weight: 500;
+        }
+
+        .project-url {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Центрированная композиция с жесткой архитектурой текста (Apple Pro дизайн) */
         main {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            padding: 60px 50px;
-            max-width: 800px;
+            padding: 0 80px;
+            max-width: 1000px;
         }
 
-        /* Двухцветный логотип по вашей картинке (два оттенка лаванды) */
+        /* Логотип строго по переданным HEX-кодам */
         .logo {
-            font-family: 'Inter', sans-serif;
-            font-weight: 900;
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
-            letter-spacing: -0.04em; /* Плотный эппловский трекинг */
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 800;
+            letter-spacing: -0.04em; /* Фирменное эппловское сжатие букв */
             text-transform: uppercase;
-            line-height: 0.9;
-            margin-bottom: 48px;
+            line-height: 1.0;
+            margin-bottom: 56px;
         }
 
-        .logo .part-under {
-            color: #bfa0db; /* Светлая пастельная лаванда (UNDER) */
+        .logo-under {
+            color: #E583EA; /* Первый цвет */
         }
 
-        .logo .part-mask {
-            color: #cc96e6; /* Насыщенная лаванда из оригинала (MASK) */
+        .logo-mask {
+            color: #C69DC8; /* Второй цвет */
         }
 
+        /* Блок манифеста: типографика как на презентациях Mac Studio */
+        .manifesto-block {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Сильный, контрастный лозунг */
         .slogan {
-            font-size: clamp(1.2rem, 3vw, 1.6rem);
-            font-weight: 400;
+            font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+            font-weight: 600;
             color: #ffffff;
-            margin-bottom: 32px;
             letter-spacing: -0.02em;
+            line-height: 1.25;
+            max-width: 750px;
         }
 
-        /* Максимально короткий и сильный текст */
-        .manifesto-p {
-            font-size: clamp(1rem, 2vw, 1.15rem);
-            font-weight: 300;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 40px;
-            max-width: 600px;
-        }
-
-        .manifesto-p bold {
-            color: #cc96e6;
+        /* Ультра-лаконичное описание, отделенное пространством */
+        .description {
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
             font-weight: 400;
+            color: rgba(255, 255, 255, 0.4); /* Эффект приглушенного текста Apple */
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+            max-width: 640px;
         }
 
-        .badge {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #cc96e6;
-            padding: 8px 16px;
-            border: 1px solid rgba(204, 150, 230, 0.15);
-            display: inline-block;
-        }
-
+        /* Нижняя панель */
         footer {
             display: flex;
             justify-content: space-between;
-            padding: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.75rem;
+            align-items: center;
+            padding: 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
             color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 0.05em;
         }
 
-        /* Инвертирующий курсор */
+        /* Кастомный монохромный инвертирующий курсор */
         #custom-cursor {
-            width: 12px;
-            height: 12px;
-            background-color: #cc96e6;
+            width: 10px;
+            height: 10px;
+            background-color: #E583EA;
             position: fixed;
             transform: translate(-50%, -50%);
             pointer-events: none;
             z-index: 9999;
             mix-blend-mode: difference;
-            transition: width 0.15s, height 0.15s;
+            transition: width 0.12s, height 0.12s;
         }
 
         body.clickable-hover #custom-cursor {
@@ -153,12 +160,14 @@
             background-color: #ffffff;
         }
 
+        /* Адаптивность без ломания сетки */
         @media (max-width: 768px) {
             * { cursor: auto; }
             #custom-cursor { display: none; }
-            .grid-container { margin: 8px; }
-            main { padding: 40px 24px; }
-            header, footer { padding: 16px; }
+            .grid-layout { margin: 12px; grid-template-rows: 64px 1fr 64px; }
+            header, footer { padding: 0 20px; }
+            main { padding: 0 24px; }
+            .logo { margin-bottom: 40px; }
         }
     </style>
 </head>
@@ -166,34 +175,34 @@
 
     <div id="custom-cursor"></div>
 
-    <div class="grid-container">
+    <div class="grid-layout">
         
         <header>
-            <div class="status-tag">
-                <span class="status-dot"></span> IN DEVELOPMENT
+            <div class="status-container">
+                <span class="status-dot"></span>
+                <span class="status-text">IN DEVELOPMENT</span>
             </div>
-            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.3);">[ undermask.app ]</div>
+            <div class="project-url">undermask.app</div>
         </header>
 
         <main>
-            <!-- Воспроизведение оригинального двухцветного логотипа -->
+            <!-- Логотип собран строго на предоставленных HEX кодах -->
             <h1 class="logo" onmouseenter="addHover()" onmouseleave="removeHover()">
-                <span class="part-under">UNDER</span><span class="part-mask">MASK</span>
+                <span class="logo-under">UNDER</span><span class="logo-mask">MASK</span>
             </h1>
             
-            <div class="slogan">“You are not statistics — you are a person.”</div>
-            
-            <!-- Текст сокращен до двух предложений -->
-            <p class="manifesto-p">
-                A private space to understand your alignment in society. Take off the mask, answer blindly, and find out where you truly stand. Because <bold>under the mask, you are real</bold>.
-            </p>
-
-            <div class="badge">[ phase 0.1 ]</div>
+            <!-- Чистая швейцарская иерархия текста -->
+            <div class="manifesto-block">
+                <div class="slogan">“You are not statistics — you are a person.”</div>
+                <p class="description">
+                    A private space designed to reveal your true alignment within society. Remove the mask, answer blindly, and see yourself without the noise of validation.
+                </p>
+            </div>
         </main>
 
         <footer>
-            <div>© 2026 UNDERMASK. Zero tracking.</div>
-            <div>[ TO BE REVEALED ]</div>
+            <div>[ ZERO DATA HARVESTING ]</div>
+            <div>PHASE 0.1</div>
         </footer>
 
     </div>
