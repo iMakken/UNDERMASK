@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNDERMASK</title>
-    <!-- Строгий моноширинный шрифт в стиле tech-minimalism -->
+    <title>UNDERMASK — In Development</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
@@ -14,133 +13,155 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* Кастомный бруталистский курсор */
+            cursor: none; /* Custom nncnc cursor */
         }
 
         body {
-            background-color: #000000;
+            background-color: #1a1a1a; /* Background matched directly to your image */
             color: #ffffff;
             font-family: 'JetBrains Mono', monospace;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        /* Тонкая индустриальная сетка-лейаут */
+        /* Industrial thin-border grid layout */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr;
             grid-template-rows: auto 1fr auto;
             min-height: 100vh;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             margin: 16px;
             position: relative;
         }
 
-        /* Верхняя панель */
+        /* Top Bar */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .status-tag {
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.12em;
+            color: #cc96e6; /* Extracted exact pink/purple from image */
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 500;
         }
 
         .status-dot {
             width: 6px;
             height: 6px;
-            background-color: #CC96E6; /* Точный цвет из вашего логотипа */
+            background-color: #cc96e6;
             border-radius: 50%;
-            box-shadow: 0 0 10px #CC96E6;
+            box-shadow: 0 0 10px #cc96e6;
         }
 
-        /* Центр страницы */
+        .header-info {
+            font-size: 0.75rem; 
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 0.05em;
+        }
+
+        /* Main Area with ample breathing room */
         main {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            padding: 60px 40px;
-            max-width: 850px;
+            padding: 80px 50px;
+            max-width: 950px;
         }
 
-        /* Логотип в вашем фирменном цвете */
+        /* Two-tone accent logo using your exact image color and styling */
         .logo {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
             font-size: clamp(2.5rem, 8vw, 5.5rem);
             letter-spacing: -0.02em;
             text-transform: uppercase;
-            color: #CC96E6; /* Оригинальный цвет из файла */
-            margin-bottom: 24px;
             line-height: 0.9;
+            margin-bottom: 56px;
+        }
+
+        .logo .part-one {
+            color: #ffffff; /* 'UNDER' stays pure white */
+        }
+
+        .logo .part-two {
+            color: #cc96e6; /* 'MASK' highlights in exact brand color */
             text-shadow: 0 0 40px rgba(204, 150, 230, 0.15);
         }
 
-        /* Главный лозунг бренда */
+        /* Core Brand Slogan */
         .slogan {
-            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
             font-weight: 400;
             color: #ffffff;
-            margin-bottom: 24px;
-            letter-spacing: -0.01em;
-            border-left: 2px solid #CC96E6;
-            padding-left: 16px;
+            margin-bottom: 44px;
+            letter-spacing: -0.02em;
+            border-left: 2px solid #cc96e6;
+            padding-left: 20px;
+            line-height: 1.4;
         }
 
-        /* Текст манифеста без карт и спойлеров к механике */
-        .manifesto {
+        /* Properly separated layout sections */
+        .manifesto-section {
+            display: flex;
+            flex-direction: column;
+            gap: 28px; /* Clean text spacing */
+            max-width: 720px;
+            margin-bottom: 56px;
+        }
+
+        .manifesto-p {
             font-size: clamp(0.95rem, 1.8vw, 1.1rem);
             font-weight: 300;
             line-height: 1.7;
-            color: rgba(255, 255, 255, 0.5);
-            max-width: 650px;
-            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.45);
         }
 
-        .manifesto bold {
+        .manifesto-p bold {
             color: #ffffff;
-            font-weight: 400;
+            font-weight: 500;
         }
 
-        /* Минималистичный интерактивный маркер ожидания */
-        .coming-soon-badge {
-            font-size: 0.85rem;
+        /* Project Milestone Badge */
+        .badge {
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #CC96E6;
-            padding: 8px 16px;
-            border: 1px solid rgba(204, 150, 230, 0.2);
+            letter-spacing: 0.08em;
+            color: #cc96e6;
+            padding: 10px 20px;
+            border: 1px solid rgba(204, 150, 230, 0.15);
+            background: rgba(204, 150, 230, 0.01);
             display: inline-block;
-            background: rgba(204, 150, 230, 0.02);
         }
 
-        /* Нижняя панель */
+        /* Bottom Bar */
         footer {
             display: flex;
             justify-content: space-between;
             padding: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 0.03em;
         }
 
-        /* Фирменный инвертирующий курсор */
+        /* Custom blend-mode cursor matching the brand palette */
         #custom-cursor {
             width: 12px;
             height: 12px;
-            background-color: #CC96E6;
+            background-color: #cc96e6;
             position: fixed;
             transform: translate(-50%, -50%);
             pointer-events: none;
@@ -155,12 +176,14 @@
             background-color: #ffffff;
         }
 
+        /* Mobile Optimization */
         @media (max-width: 768px) {
             * { cursor: auto; }
             #custom-cursor { display: none; }
             .grid-container { margin: 8px; }
-            main { padding: 40px 20px; }
+            main { padding: 48px 24px; }
             header, footer { padding: 16px; }
+            .logo { margin-bottom: 36px; }
         }
     </style>
 </head>
@@ -172,34 +195,42 @@
         
         <header>
             <div class="status-tag">
-                <span class="status-dot"></span> undermask.app — encrypted space
+                <span class="status-dot"></span> IN DEVELOPMENT
             </div>
-            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.4);">[ Zero Data Harvesting ]</div>
+            <div class="header-info">[ undermask.app — zero tracking ]</div>
         </header>
 
         <main>
-            <!-- Название в оригинальном цвете -->
-            <h1 class="logo" onmouseenter="addHover()" onmouseleave="removeHover()">UNDERMASK</h1>
+            <!-- Perfectly color-matched split branding -->
+            <h1 class="logo" onmouseenter="addHover()" onmouseleave="removeHover()">
+                <span class="part-one">UNDER</span><span class="part-two">MASK</span>
+            </h1>
             
-            <!-- Интригующий манифест без раскрытия механики вопросов -->
             <div class="slogan">“You are not statistics — you are a person.”</div>
             
-            <div class="manifesto">
-                An application designed to show your true alignment within society. By shedding social expectations, names, and faces, you step into a space of absolute anonymity. Because <bold>under the mask, you are real</bold>.
+            <div class="manifesto-section">
+                <p class="manifesto-p">
+                    An application designed to show your true alignment within society. A digital space engineered to reveal where you stand without the weight of judgment.
+                </p>
+                <p class="manifesto-p">
+                    By shedding social expectations, artificial metrics, names, and faces, you step into a zone of absolute, uncompromised anonymity. 
+                </p>
+                <p class="manifesto-p">
+                    Because <bold>under the mask, you are real</bold>. No performance. No validation. Just your raw perspective.
+                </p>
             </div>
 
-            <div class="coming-soon-badge">[ Phase 0.1 — To Be Revealed ]</div>
+            <div class="badge">[ phase 0.1 — early specification ]</div>
         </main>
 
         <footer>
-            <div>© 2026 UNDERMASK. No tracking. No compromise.</div>
-            <div>[ DISCOVER YOUR PLACE ]</div>
+            <div>© 2026 UNDERMASK. Private environment.</div>
+            <div>[ TO BE REVEALED ]</div>
         </footer>
 
     </div>
 
     <script>
-        // Скрипт кастомного курсора nncnc
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
