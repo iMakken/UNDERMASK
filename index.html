@@ -4,29 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNDERMASK — In Development</title>
+    <!-- Подключаем строгий моноширинный JetBrains и плотный премиальный Inter -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=Inter:wght@900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            cursor: none; /* Custom nncnc cursor */
+            cursor: none; /* Кастомный курсор */
         }
 
         body {
-            background-color: #1a1a1a; /* Background matched directly to your image */
+            background-color: #1a1a1a; /* Точный графитовый фон из вашей картинки */
             color: #ffffff;
             font-family: 'JetBrains Mono', monospace;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        /* Industrial thin-border grid layout */
+        /* Тонкая сетка-каркас */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr;
@@ -37,7 +38,6 @@
             position: relative;
         }
 
-        /* Top Bar */
         header {
             display: flex;
             justify-content: space-between;
@@ -50,7 +50,7 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: #cc96e6; /* Extracted exact pink/purple from image */
+            color: #cc96e6;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -62,91 +62,69 @@
             height: 6px;
             background-color: #cc96e6;
             border-radius: 50%;
-            box-shadow: 0 0 10px #cc96e6;
         }
 
-        .header-info {
-            font-size: 0.75rem; 
-            color: rgba(255,255,255,0.3);
-            letter-spacing: 0.05em;
-        }
-
-        /* Main Area with ample breathing room */
         main {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            padding: 80px 50px;
-            max-width: 950px;
+            padding: 60px 50px;
+            max-width: 800px;
         }
 
-        /* Two-tone accent logo using your exact image color and styling */
+        /* Двухцветный логотип по вашей картинке (два оттенка лаванды) */
         .logo {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-weight: 900;
             font-size: clamp(2.5rem, 8vw, 5.5rem);
-            letter-spacing: -0.02em;
+            letter-spacing: -0.04em; /* Плотный эппловский трекинг */
             text-transform: uppercase;
             line-height: 0.9;
-            margin-bottom: 56px;
+            margin-bottom: 48px;
         }
 
-        .logo .part-one {
-            color: #ffffff; /* 'UNDER' stays pure white */
+        .logo .part-under {
+            color: #bfa0db; /* Светлая пастельная лаванда (UNDER) */
         }
 
-        .logo .part-two {
-            color: #cc96e6; /* 'MASK' highlights in exact brand color */
-            text-shadow: 0 0 40px rgba(204, 150, 230, 0.15);
+        .logo .part-mask {
+            color: #cc96e6; /* Насыщенная лаванда из оригинала (MASK) */
         }
 
-        /* Core Brand Slogan */
         .slogan {
             font-size: clamp(1.2rem, 3vw, 1.6rem);
             font-weight: 400;
             color: #ffffff;
-            margin-bottom: 44px;
+            margin-bottom: 32px;
             letter-spacing: -0.02em;
-            border-left: 2px solid #cc96e6;
-            padding-left: 20px;
-            line-height: 1.4;
         }
 
-        /* Properly separated layout sections */
-        .manifesto-section {
-            display: flex;
-            flex-direction: column;
-            gap: 28px; /* Clean text spacing */
-            max-width: 720px;
-            margin-bottom: 56px;
-        }
-
+        /* Максимально короткий и сильный текст */
         .manifesto-p {
-            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            font-size: clamp(1rem, 2vw, 1.15rem);
             font-weight: 300;
-            line-height: 1.7;
-            color: rgba(255, 255, 255, 0.45);
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 40px;
+            max-width: 600px;
         }
 
         .manifesto-p bold {
-            color: #ffffff;
-            font-weight: 500;
+            color: #cc96e6;
+            font-weight: 400;
         }
 
-        /* Project Milestone Badge */
         .badge {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             color: #cc96e6;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border: 1px solid rgba(204, 150, 230, 0.15);
-            background: rgba(204, 150, 230, 0.01);
             display: inline-block;
         }
 
-        /* Bottom Bar */
         footer {
             display: flex;
             justify-content: space-between;
@@ -154,10 +132,9 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.25);
-            letter-spacing: 0.03em;
         }
 
-        /* Custom blend-mode cursor matching the brand palette */
+        /* Инвертирующий курсор */
         #custom-cursor {
             width: 12px;
             height: 12px;
@@ -171,19 +148,17 @@
         }
 
         body.clickable-hover #custom-cursor {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             background-color: #ffffff;
         }
 
-        /* Mobile Optimization */
         @media (max-width: 768px) {
             * { cursor: auto; }
             #custom-cursor { display: none; }
             .grid-container { margin: 8px; }
-            main { padding: 48px 24px; }
+            main { padding: 40px 24px; }
             header, footer { padding: 16px; }
-            .logo { margin-bottom: 36px; }
         }
     </style>
 </head>
@@ -197,34 +172,27 @@
             <div class="status-tag">
                 <span class="status-dot"></span> IN DEVELOPMENT
             </div>
-            <div class="header-info">[ undermask.app — zero tracking ]</div>
+            <div style="font-size: 0.75rem; color: rgba(255,255,255,0.3);">[ undermask.app ]</div>
         </header>
 
         <main>
-            <!-- Perfectly color-matched split branding -->
+            <!-- Воспроизведение оригинального двухцветного логотипа -->
             <h1 class="logo" onmouseenter="addHover()" onmouseleave="removeHover()">
-                <span class="part-one">UNDER</span><span class="part-two">MASK</span>
+                <span class="part-under">UNDER</span><span class="part-mask">MASK</span>
             </h1>
             
             <div class="slogan">“You are not statistics — you are a person.”</div>
             
-            <div class="manifesto-section">
-                <p class="manifesto-p">
-                    An application designed to show your true alignment within society. A digital space engineered to reveal where you stand without the weight of judgment.
-                </p>
-                <p class="manifesto-p">
-                    By shedding social expectations, artificial metrics, names, and faces, you step into a zone of absolute, uncompromised anonymity. 
-                </p>
-                <p class="manifesto-p">
-                    Because <bold>under the mask, you are real</bold>. No performance. No validation. Just your raw perspective.
-                </p>
-            </div>
+            <!-- Текст сокращен до двух предложений -->
+            <p class="manifesto-p">
+                A private space to understand your alignment in society. Take off the mask, answer blindly, and find out where you truly stand. Because <bold>under the mask, you are real</bold>.
+            </p>
 
-            <div class="badge">[ phase 0.1 — early specification ]</div>
+            <div class="badge">[ phase 0.1 ]</div>
         </main>
 
         <footer>
-            <div>© 2026 UNDERMASK. Private environment.</div>
+            <div>© 2026 UNDERMASK. Zero tracking.</div>
             <div>[ TO BE REVEALED ]</div>
         </footer>
 
