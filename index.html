@@ -20,14 +20,13 @@ html, body {
     color: #ffffff;
     font-family: 'JetBrains Mono', monospace;
     min-height: 100vh;
-    overflow: hidden;
 }
 /* Тонкие бруталистские линии сетки nncnc.app */
 .grid-layout {
     display: grid;
     grid-template-columns: 1fr;   
     grid-template-rows: 80px 1fr auto;
-    min-height: 100vh;
+    min-height: calc(100vh - 80px); /* Автоматический расчет высоты с учетом баннера */
     border: 1px solid rgba(255, 255, 255, 0.04);
     margin: 24px;
     position: relative;
@@ -67,7 +66,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 0 80px;
+    padding: 60px 80px;
     max-width: 1100px;
 }
 /* Логотип: Шрифт Dela Gothic One + Строгий подбор цветов по картинке */
@@ -168,7 +167,7 @@ body.clickable-hover #custom-cursor {
 @media (max-width: 768px) {
     * { cursor: auto; }
     #custom-cursor { display: none; }
-    .grid-layout { margin: 12px; grid-template-rows: 64px 1fr auto; }
+    .grid-layout { margin: 12px; grid-template-rows: 64px 1fr auto; min-height: auto; }
     header { padding: 0 20px; }
     main { padding: 48px 24px; }
     footer { padding: 24px 20px; }
@@ -179,7 +178,7 @@ body.clickable-hover #custom-cursor {
 </head>
 <body>
 <div class="announcement-banner">
-    <a href="https://t.me/undermask" target="_blank" rel="noopener" onmouseenter="addHover()" onmouseleave="removeHover()">
+    <a href="https://t.me" target="_blank" rel="noopener" onmouseenter="addHover()" onmouseleave="removeHover()">
         Launching December 2026. Follow raw updates on <span>Telegram →</span>
     </a>
 </div>
