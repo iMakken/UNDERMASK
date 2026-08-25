@@ -1,262 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNDERMASK — IN DEVELOPMENT</title>
-    <!-- Подключаем оригинальные шрифты Dela Gothic One и JetBrains Mono -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: none; /* Интерактивный моно-курсор nncnc */
-        }
-
-        html, body {
-            background-color: #000000; /* Глубокий черный фон */
-            color: #ffffff;
-            font-family: 'JetBrains Mono', monospace;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Тонкие бруталистские линии сетки nncnc.app */
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 80px 1fr auto;
-            min-height: calc(100vh - 45px);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            margin: 24px;
-            position: relative;
-        }
-
-        /* Верхняя плашка анонса Telegram */
-        .announcement-banner {
-            background-color: #111112; /* Чуть светлее глубокого черного */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            text-align: center;
-            padding: 12px 20px;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: -0.01em;
-        }
-
-        .announcement-banner a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.2s ease;
-            display: inline-block;
-        }
-
-        .announcement-banner a span {
-            color: #E583EA; /* Подсветим слово Telegram розовым */
-            font-weight: 600;
-        }
-
-        .announcement-banner a:hover {
-            color: #E583EA;
-        }
-
-        /* Верхняя панель */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 11px;
-            letter-spacing: 0.08em;
-        }
-
-        /* Блок IN DEVELOPMENT: Сверка по референсу (Точка — C69DC8, Слово — E583EA) */
-        .status-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .status-dot {
-            width: 5px;
-            height: 5px;
-            background-color: #C69DC8; /* Насыщенная лаванда */
-            border-radius: 50%;
-        }
-
-        .status-text {
-            color: #E583EA; /* Светлая розовая лаванда */
-            font-weight: 500;
-        }
-
-        .project-url {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Главная контентная область */
-        main {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 0 80px;
-            max-width: 1100px;
-        }
-
-        /* Логотип: Шрифт Dela Gothic One + Строгий подбор цветов по картинке */
-        .logo {
-            font-family: 'Dela Gothic One', sans-serif;
-            font-size: clamp(2.2rem, 7vw, 5.2rem);
-            line-height: 1.0;
-            margin-bottom: 48px;
-            text-transform: uppercase;
-        }
-
-        /* Сверяемся с референсом: UNDER насыщенный (C69DC8), MASK светлый (E583EA) */
-        .logo-under {
-            color: #C69DC8;
-        }
-
-        .logo-mask {
-            color: #E583EA;
-        }
-
-        /* Блок манифеста */
-        .manifesto-block {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .slogan {
-            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-            font-weight: 400;
-            color: #ffffff;
-            letter-spacing: -0.02em;
-            line-height: 1.3;
-            max-width: 750px;
-        }
-
-        .description {
-            font-size: clamp(0.95rem, 1.6vw, 1.1rem);
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.4);
-            line-height: 1.6;
-            max-width: 620px;
-        }
-
-        /* Футер со строгой структурой копирайта */
-        footer {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding: 32px 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.25);
-            letter-spacing: 0.05em;
-        }
-
-        .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .credits {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* Кастомный курсор */
-        #custom-cursor {
-            width: 10px;
-            height: 10px;
-            background-color: #E583EA;
-            position: fixed;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: width 0.12s, height 0.12s;
-        }
-
-        body.clickable-hover #custom-cursor {
-            width: 24px;
-            height: 24px;
-            background-color: #ffffff;
-        }
-
-        /* Адаптив под тач-устройства */
-        @media (max-width: 768px) {
-            * { cursor: auto; }
-            #custom-cursor { display: none; }
-            .grid-layout { margin: 12px; grid-template-rows: 64px 1fr auto; }
-            header { padding: 0 20px; }
-            main { padding: 48px 24px; }
-            footer { padding: 24px 20px; }
-            .logo { margin-bottom: 32px; }
-            .footer-top { flex-direction: column; align-items: flex-start; gap: 8px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNDERMASK IN DEVELOPMENT</title>
+<!-- Подключаем оригинальный шрифт Deltapi Gothic One (Dela Gothic One) и JetBrains Mono -->
+<link rel="preconnect" href="https://googleapis.com">
+<link rel="preconnect" href="https://gstatic.com" crossorigin>
+<link href="https://googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none; /* Интерактивный моно-курсор nncnc */
+}
+html, body {
+    background-color: #000000; /* Глубокий черный фон */
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+    overflow: hidden;
+}
+/* Тонкие бруталистские линии сетки nncnc.app */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;   
+    grid-template-rows: 80px 1fr auto;
+    min-height: 100vh;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    margin: 24px;
+    position: relative;
+}
+/* Upper panel */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+}
+/* Блок IN DEVELOPMENT: Сверка по референсу (Точка C69DC8, Слово E583EA) */
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.status-dot {
+    width: 5px;
+    height: 5px;
+    background-color: #C69DC8; /* Насыщенная лаванда */
+    border-radius: 50%;
+}
+.status-text {
+    color: #E583EA; /* Светлая розовая лаванда */
+    font-weight: 500;
+}
+.project-url { 
+    color: rgba(255, 255, 255, 0.3);
+}
+/* Главная контентная область */
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 80px;
+    max-width: 1100px;
+}
+/* Логотип: Шрифт Dela Gothic One + Строгий подбор цветов по картинке */
+.logo {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: clamp(2.2rem, 7vw, 5.2rem);
+    line-height: 1.0; 
+    margin-bottom: 48px;
+    text-transform: uppercase;
+}
+/* Сверяемся с референсом: UNDER насыщенный (C69DC8), MASK светлый (E583EA) */
+.logo-under {
+    color: #C69DC8;
+}
+.logo-mask {
+    color: #E583EA; 
+}
+/* Блок манифеста */
+.manifesto-block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.slogan {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    max-width: 750px;
+}
+.description {
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.6;
+    max-width: 620px;
+}
+/* Футер: со строгой структурой копирайта */
+footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.05em;
+}
+.footer-top {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+.credits {
+    color: rgba(255, 255, 255, 0.5);
+}
+/* Кастомный курсор */
+#custom-cursor {
+    width: 10px;
+    height: 10px;
+    background-color: #E583EA;
+    position: fixed;
+    transform: translate(-50%, -50%); 
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: width 0.12s, height 0.12s;
+}
+body.clickable-hover #custom-cursor {
+    width: 24px;
+    height: 24px;
+    background-color: #ffffff;
+}
+.announcement-banner {
+    background-color: #111112; /* Чуть светлее глубокого черного */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+.announcement-banner a {
+    color: rgba(255, 255, 255, 0.6); 
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-block;
+}
+.announcement-banner a span {
+    color: #E583EA;
+    font-weight: 600;
+}
+.announcement-banner a:hover {
+    color: #E583EA; 
+}
+/* Адаптив под тач-устройства */
+@media (max-width: 768px) {
+    * { cursor: auto; }
+    #custom-cursor { display: none; }
+    .grid-layout { margin: 12px; grid-template-rows: 64px 1fr auto; }
+    header { padding: 0 20px; }
+    main { padding: 48px 24px; }
+    footer { padding: 24px 20px; }
+    .logo { margin-bottom: 32px; }
+    .footer-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+</style>
 </head>
 <body>
-
-    <div class="announcement-banner">
-        <a href="https://t.me" target="_blank" rel="noopener" onmouseenter="addHover()" onmouseleave="removeHover()">
-            Launching December 2026. Follow raw updates on <span>Telegram →</span>
-        </a>
+<div class="announcement-banner">
+    <a href="https://t.me/undermask" target="_blank" rel="noopener" onmouseenter="addHover()" onmouseleave="removeHover()">
+        Launching December 2026. Follow raw updates on <span>Telegram →</span>
+    </a>
+</div>
+<div id="custom-cursor"></div>
+<div class="grid-layout">
+<header>
+    <div class="status-container">
+        <!-- Точка насыщенная, слово светлое -->
+        <span class="status-dot"></span>
+        <span class="status-text">IN DEVELOPMENT</span>
     </div>
-
-    <div id="custom-cursor"></div>
-
-    <div class="grid-layout">
-        
-        <header>
-            <div class="status-container">
-                <span class="status-dot"></span>
-                <span class="status-text">IN DEVELOPMENT</span>
-            </div>
-            <div class="project-url">undermask.app</div>
-        </header>
-
-        <main>
-            <h1 class="logo" onmouseenter="addHover()" onmouseleave="removeHover()">
-                <span class="logo-under">UNDER</span><span class="logo-mask">MASK</span>
-            </h1>
-            
-            <div class="manifesto-block">
-                <div class="slogan">Find out how many are like you.</div>
-                <p class="description">
-                    A private space designed to reveal your true alignment within society. Remove the mask, answer blindly, and see yourself without the noise of validation.
-                </p>
-            </div>
-        </main>
-
-        <footer>
-            <div class="footer-top">
-                <div class="credits">Designed and coded by iMakken</div>
-                <div>PHASE 0.1</div>
-            </div>
-            <div style="color: rgba(255, 255, 255, 0.15); margin-top: 4px;">
-                © 2026 UNDERMASK Lab. All rights reserved.
-            </div>
-        </footer>
-
+    <div class="project-url">undermask.app</div>
+</header>
+<main>
+    <!-- Логотип: Шрифт Dela Gothic One. UNDER — #C69DC8, MASK — #E583EA -->
+    <h1 class="logo" onmouseenter="addHover()" onmouseleave="removeHover()">
+        <span class="logo-under">UNDER</span><span class="logo-mask">MASK</span>
+    </h1>
+    <div class="manifesto-block">
+        <div class="slogan">Find out how many are like you.</div>
+        <p class="description">
+            A private space designed to reveal your true alignment within society. Remove the mask, answer blindly, and see yourself without the noise of validation.
+        </p>
     </div>
-
-    <script>
-        const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        function addHover() { document.body.classList.add('clickable-hover'); }
-        function removeHover() { document.body.classList.remove('clickable-hover'); }
-    </script>
+</main>
+<footer>
+    <div class="footer-top">
+        <div class="credits">Designed and coded by iMakken © 2026 UNDERMASK Lab. All rights reserved.</div>
+        <div>PHASE 0.1</div>
+    </div>
+</footer>
+</div>
+<script>
+const cursor = document.getElementById('custom-cursor');
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
+function addHover() { document.body.classList.add('clickable-hover'); }
+function removeHover() { document.body.classList.remove('clickable-hover'); }
+</script>
 </body>
 </html>
