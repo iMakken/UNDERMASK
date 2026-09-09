@@ -1,241 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Privacy Policy for the UNDERMASK app.">
-  <meta name="theme-color" content="#000000">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjI4IiBmaWxsPSIjMDAwMDAwIi8+PGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iMTUiIGZpbGw9IiNkNWZmMWMiLz48L3N2Zz4=">
-  <title>Privacy Policy — UNDERMASK</title>
-  <style>
-    :root {
-      --bg: #000000;
-      --accent: #d5ff1c;
-      --text-main: #ffffff;
-      --text-muted: #86868b;
-      --border: #222224;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Privacy Policy for the UNDERMASK app. No accounts, no analytics, no tracking.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>Privacy Policy — UNDERMASK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+}
+html, body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+}
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 80px 1fr auto;
+    min-height: calc(100vh - 48px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    margin: 24px;
+    position: relative;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+}
+.header-logo {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    letter-spacing: 0;
+}
+.header-logo .u { color: #C69DC8; }
+.header-logo .m { color: #E583EA; }
+.back-link {
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.back-link:hover { color: #E583EA; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+main {
+    padding: 60px 80px 80px;
+    max-width: 820px;
+}
+h1 {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    line-height: 1.05;
+    color: #C69DC8;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+.meta {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+.lede {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    line-height: 1.55;
+    color: #ffffff;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+h2 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #E583EA;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 48px 0 16px 0;
+}
+p, li {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.75;
+}
+p + p { margin-top: 14px; }
+ul {
+    margin: 16px 0 0 20px;
+}
+li + li { margin-top: 12px; }
+strong {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+a.inline {
+    color: #E583EA;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(229, 131, 234, 0.35);
+    transition: border-color 0.2s ease;
+}
+a.inline:hover { border-bottom-color: #E583EA; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--text-main);
-      line-height: 1.4;
-      -webkit-font-smoothing: antialiased;
-      letter-spacing: -0.01em;
-    }
+.callout {
+    border: 1px solid rgba(229, 131, 234, 0.25);
+    padding: 24px 28px;
+    margin: 40px 0 0;
+}
+.callout p { color: rgba(255, 255, 255, 0.6); }
 
-    a:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-      border-radius: 2px;
-    }
+footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.05em;
+}
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.credits { color: rgba(255, 255, 255, 0.5); }
 
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-
-    header {
-      padding: 48px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      color: var(--text-main);
-      text-decoration: none;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    .back-link {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--text-main);
-    }
-
-    .policy {
-      max-width: 660px;
-      padding: 40px 0 100px 0;
-    }
-
-    h1 {
-      font-size: clamp(2.4rem, 6vw, 3.4rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 16px;
-    }
-
-    .updated {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 48px;
-    }
-
-    .lede {
-      font-size: 1.25rem;
-      line-height: 1.5;
-      color: var(--text-main);
-      padding-bottom: 40px;
-      margin-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    h2 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin: 48px 0 16px 0;
-    }
-
-    p, li {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-
-    p + p {
-      margin-top: 14px;
-    }
-
-    ul {
-      margin: 16px 0 0 20px;
-    }
-
-    li + li {
-      margin-top: 12px;
-    }
-
-    strong {
-      color: var(--text-main);
-      font-weight: 600;
-    }
-
-    a.inline {
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(213, 255, 28, 0.35);
-    }
-
-    a.inline:hover {
-      border-bottom-color: var(--accent);
-    }
-
-    footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 12px;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 0 24px;
-      }
-
-      header {
-        padding: 32px 0;
-      }
-    }
-  </style>
+#custom-cursor {
+    width: 10px;
+    height: 10px;
+    background-color: #E583EA;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: width 0.12s, height 0.12s;
+}
+body.clickable-hover #custom-cursor {
+    width: 24px;
+    height: 24px;
+    background-color: #ffffff;
+}
+@media (max-width: 768px) {
+    * { cursor: auto; }
+    #custom-cursor { display: none; }
+    .grid-layout { margin: 12px; grid-template-rows: 64px 1fr auto; min-height: auto; }
+    header { padding: 0 20px; }
+    main { padding: 40px 24px 60px; }
+    footer { padding: 24px 20px; }
+    .footer-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .callout { padding: 20px; }
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <a class="logo" href="/">UNDERMASK<span>.</span></a>
-      <a class="back-link" href="/">Back to site</a>
-    </header>
+<div id="custom-cursor"></div>
+<div class="grid-layout">
 
-    <main class="policy">
-      <h1>Privacy Policy</h1>
-      <p class="updated">Last updated: 06.09.2026 · Applies to the UNDERMASK mobile application and the website nncnc.app</p>
-      <p class="updated">UNDERMASK is developed by Individual Entrepreneur Andrei Akentev, operating as NNCNC Lab.</p>
+<header>
+    <a class="header-logo" href="/" onmouseenter="addHover()" onmouseleave="removeHover()"><span class="u">UNDER</span><span class="m">MASK</span></a>
+    <a class="back-link" href="/" onmouseenter="addHover()" onmouseleave="removeHover()">← BACK TO SITE</a>
+</header>
 
-      <p class="lede">
-        UNDERMASK records your data on your phone. We have no account system, no analytics, and no ads. This is not a promise about how we handle your data — we operate no infrastructure capable of receiving it.
-      </p>
+<main>
+    <h1>Privacy Policy</h1>
 
-      <h2>1. Data the application handles</h2>
-      <p>Everything below is created and stored on your device only.</p>
-      <ul>
-        <li><strong>Location data.</strong> While a ride is recording, the app reads GPS coordinates, including in the background so recording continues when the screen is off. Coordinates are written to local files and used to calculate distance, speed, elevation gain, and to draw your route curve.</li>
-        <li><strong>Ride history.</strong> Date, duration, distance, average and maximum speed, elevation gain, estimated calories, and effort score for each ride.</li>
-        <li><strong>Bike information.</strong> Bike names, odometer readings, and service intervals you enter.</li>
-        <li><strong>Optional settings.</strong> Body weight, used only to estimate calories — leave it blank and calories are simply not shown. Nickname, used only on ride cards you choose to share. Units and language.</li>
-      </ul>
-      <p><strong>Device information:</strong> we do not collect device identifiers, analytics, or crash reports. The application operates entirely on your device.</p>
-      <p><strong>Storage:</strong> your routes and all ride data are stored locally on your device only. We operate no servers and never receive your GPS coordinates.</p>
-      <p><strong>Device backups:</strong> if you have iCloud Backup or Google Backup enabled, a copy of the app's data may be stored in your own cloud account under Apple's or Google's terms. We have no access to it.</p>
+    <p class="meta">
+        Last updated: 9 September 2026<br>
+        Applies to the UNDERMASK mobile application and the website undermask.app<br>
+        UNDERMASK is developed by Individual Entrepreneur Andrei Akentev, operating as NNCNC Lab.
+    </p>
 
-      <h2>2. How the data is used</h2>
-      <ul>
-        <li>To display live speed, distance, time, and average speed during a ride.</li>
-        <li>To save completed rides to your local history.</li>
-        <li>To draw your route curve and calculate your effort score.</li>
-        <li>To track odometer readings and bike service status.</li>
-      </ul>
-      <p>All processing happens on your device.</p>
+    <p class="lede">
+        UNDERMASK has no accounts, no analytics, no advertising, and no tracking of any kind. We never learn who you are — not because we choose not to look, but because we never ask and operate no system capable of connecting an answer to a person.
+    </p>
 
-      <h2>3. Data sharing and third parties</h2>
-      <p>We do not sell, trade, rent, or share your personal or location data with anyone. We use no third-party analytics, advertising, or tracking services. All ride data remains on your device and never reaches us or any third party. Deleting the application removes all your data from your device.</p>
-      <p>The only third party involved is the app store itself: Apple and Google collect their own download and device data as part of distributing any app. We do not control this and receive no personal data from it.</p>
+    <h2>1. What we never collect</h2>
+    <p>We do not ask for and never receive:</p>
+    <ul>
+        <li>Your name, email address, or phone number.</li>
+        <li>Your age, gender, city, country, or any other demographic information.</li>
+        <li>Any login, social account, or contact list.</li>
+        <li>Any advertising identifier or device fingerprint.</li>
+    </ul>
+    <p>There is no registration and no sign-in. The application opens and works immediately.</p>
 
-      <h2>4. Data you choose to send us</h2>
-      <p>Nothing is transmitted automatically. Some features send data only when you start them yourself.</p>
-      <ul>
-        <li><strong>Feedback.</strong> If you write to us or use the suggestion option in the app, we receive your message and your email address, and use them only to reply.</li>
-        <li><strong>Diagnostic report.</strong> The app can generate a technical report about a recording session — timings, GPS point counts, accuracy statistics, battery level. It is never sent anywhere on its own. If you choose to send it to us for support, we receive whatever it contains and use it only to investigate your issue.</li>
-        <li><strong>Exports and sharing.</strong> Backup files and ride cards are handed to your device's share sheet or file picker. Where they go from there is entirely your choice; they do not pass through us.</li>
-      </ul>
+    <h2>2. The anonymous device identifier</h2>
+    <p>When you first open the app, it generates a <strong>random identifier</strong> — a string of characters with no meaning, created on your device. It contains no information about you or your phone.</p>
+    <p>Its only purpose is to prevent the same device from answering the same question more than once, which is what keeps the statistics meaningful. It tells our server "same device or different device" — never "who".</p>
 
-      <h2>5. Permissions</h2>
-      <ul>
-        <li><strong>Location, including background.</strong> Required to record a ride. Without it the app cannot measure distance or draw a route. You can revoke it at any time in your device settings — recording will stop working, but nothing else depends on it.</li>
-        <li><strong>File access.</strong> Used only when you export a backup or import one.</li>
-      </ul>
+    <h2>3. What is stored on your device</h2>
+    <p>The following stays on your phone and is never sent to us:</p>
+    <ul>
+        <li>Your Drift Level and the number of questions you have answered.</li>
+        <li>Which questions you have already seen, so they are not shown again.</li>
+        <li>Which option you selected for each question.</li>
+        <li>Your app settings.</li>
+    </ul>
+    <p>Your personal answer history exists only on your device. We cannot read it, retrieve it, or restore it.</p>
 
-      <h2>6. The website</h2>
-      <p>nncnc.app has no analytics, no cookies, no tracking pixels, and no embedded third-party fonts or scripts. Nothing about your visit is recorded by us. Our hosting provider keeps standard technical logs, such as IP address and browser type, for security and reliability; we do not use them to identify anyone.</p>
+    <h2>4. What is stored on our server</h2>
+    <p>Our server holds the questions themselves and <strong>anonymous counters</strong> — how many people in total selected each option. When you answer, one number goes up by one.</p>
+    <p>We deliberately do not store a record connecting your identifier to the option you chose. Such a record does not exist anywhere in our system. We know that 6,412 people chose a particular answer; we have no way of knowing which devices they were.</p>
 
-      <h2>7. Retention and deletion</h2>
-      <p>Your data stays on your device for as long as you keep the app installed. We hold nothing, so there is nothing for us to retain or delete. Uninstalling the app removes its data from your device. If you have a device backup enabled, remove it through your Apple or Google account settings as well.</p>
+    <h2>5. IP addresses and logs</h2>
+    <p>Like any internet service, our server receives a connection from your device. <strong>We do not log or store IP addresses.</strong> Our hosting provider may process connection data transiently for basic infrastructure protection, but we neither retain it nor use it to identify anyone.</p>
 
-      <h2>8. Children</h2>
-      <p>The app is not directed at children and collects no data from anyone, including children.</p>
+    <h2>6. No third-party services</h2>
+    <p><strong>We use no analytics, no crash reporting, no advertising networks, and no third-party trackers.</strong> No SDK inside the app reports your behaviour to anyone. This is unusual, and it is deliberate: an application built on anonymity should not quietly hand your activity to someone else.</p>
+    <p>It also means we cannot see how you use the app. If something breaks, we will only know if you tell us.</p>
 
-      <h2>9. Changes to this policy</h2>
-      <p>We may update this policy as the app develops. The current version is always published at nncnc.app/privacy, and the date at the top shows when it last changed.</p>
+    <h2>7. Device backups</h2>
+    <p>If you have iCloud Backup or Google Backup enabled, a copy of the app's data may be stored in <strong>your own cloud account</strong>, under Apple's or Google's terms, and restored if you reinstall or change your phone. This is a feature of your device, not of our service. We have no access to that backup and cannot read it.</p>
 
-      <h2>10. Contact</h2>
-      <p><a class="inline" href="mailto:support@undermask.app">support@undermask.app</a></p>
-    </main>
+    <h2>8. Purchases</h2>
+    <p>If paid features are offered in the future, payment is handled entirely by Apple or Google. We never see your card details, billing address, or name. We only receive confirmation from the store that a purchase is valid.</p>
 
-    <footer>
-      &copy; 2026 NNCNC Lab
-    </footer>
-  </div>
+    <h2>9. Children</h2>
+    <p>UNDERMASK is not directed at children under 13. Since we collect no personal data from anyone, we hold no personal data belonging to children either.</p>
+
+    <h2>10. Your rights</h2>
+    <p>Data protection law gives you rights to access, correct, or delete your personal data. In our case these rights have an unusual answer: <strong>we hold no personal data about you to access, correct, or delete.</strong></p>
+    <p>You are always in full control of what does exist:</p>
+    <ul>
+        <li><strong>Reset</strong> inside the app clears your Drift Level and starts your count from zero.</li>
+        <li><strong>Deleting the app</strong> removes your local data from the device. If a cloud backup exists in your Apple or Google account, you can delete it through your device settings.</li>
+    </ul>
+    <p>Note that answers already counted remain part of the anonymous totals. They are not personal data — they cannot be traced back to you, and there is nothing in them to identify.</p>
+
+    <h2>11. Changes to this policy</h2>
+    <p>If this policy changes, the updated version will be published on this page with a new date. If a change ever affects what we collect, we will say so plainly rather than quietly editing the text.</p>
+
+    <h2>12. Contact</h2>
+    <p>Questions about privacy: <a class="inline" href="mailto:support@undermask.app" onmouseenter="addHover()" onmouseleave="removeHover()">support@undermask.app</a></p>
+    <p>Data controller: Individual Entrepreneur Andrei Akentev (NNCNC Lab).</p>
+
+    <div class="callout">
+        <p><strong>In short:</strong> the app knows what a crowd of anonymous devices answered. It does not know who you are, and it never did.</p>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-top">
+        <div class="credits">Designed and coded by iMakken © 2026 UNDERMASK Lab. All rights reserved.</div>
+        <div>PHASE 0.1</div>
+    </div>
+</footer>
+
+</div>
+<script>
+const cursor = document.getElementById('custom-cursor');
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
+function addHover() { document.body.classList.add('clickable-hover'); }
+function removeHover() { document.body.classList.remove('clickable-hover'); }
+</script>
 </body>
 </html>
