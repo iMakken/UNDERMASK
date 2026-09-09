@@ -181,7 +181,29 @@ body.clickable-hover #custom-cursor {
 .announcement-banner a:hover {
     color: #E583EA;
 }
-/* Адаптив: на планшете/телефоне колонки складываются, картинка уходит вниз под текст */
+
+    .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+.footer-link {
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+}
+.footer-link:hover {
+    color: #E583EA;
+}
+.footer-phase {
+    color: rgba(255, 255, 255, 0.25);
+}
+    
+    
+    /* Адаптив: на планшете/телефоне колонки складываются, картинка уходит вниз под текст */
 @media (max-width: 900px) {
     main {
         flex-direction: column;
@@ -205,7 +227,8 @@ body.clickable-hover #custom-cursor {
     main { padding: 48px 24px; }
     footer { padding: 24px 20px; }
     .logo { margin-bottom: 32px; }
-    .footer-top { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .footer-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-right { gap: 20px; }
     .main-image { max-width: 100%; }
 }
 </style>
@@ -241,12 +264,17 @@ body.clickable-hover #custom-cursor {
         <img src="img/main.png" alt="UNDERMASK" class="main-image">
     </div>
 </main>
+
 <footer>
     <div class="footer-top">
         <div class="credits">Designed and coded by iMakken © 2026 NNCNC Lab · Individual Entrepreneur Andrei Akentev. All rights reserved.</div>
-        <p><a href="/privacy">Privacy Policy</a></p>
+        <div class="footer-right">
+            <a href="/privacy" class="footer-link" onmouseenter="addHover()" onmouseleave="removeHover()">PRIVACY POLICY</a>
+            <span class="footer-phase">PHASE 0.1</span>
+        </div>
     </div>
 </footer>
+    
 </div>
 <script>
 const cursor = document.getElementById('custom-cursor');
