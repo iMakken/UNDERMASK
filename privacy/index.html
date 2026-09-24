@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -184,7 +185,7 @@ body.clickable-hover #custom-cursor {
     <h1>Privacy Policy</h1>
 
     <p class="meta">
-        Last updated: 9 September 2026<br>
+        Last updated: 23 September 2026<br>
         Applies to the UNDERMASK mobile application and the website undermask.app<br>
         UNDERMASK is developed by Individual Entrepreneur Andrei Akentev, operating as NNCNC Lab.
     </p>
@@ -210,34 +211,53 @@ body.clickable-hover #custom-cursor {
     <h2>3. What is stored on your device</h2>
     <p>The following stays on your phone and is never sent to us:</p>
     <ul>
-        <li>Your Drift Level and the number of questions you have answered.</li>
+        <li>Your Drift Level: two numbers for the total, and two more for each of the nine categories.</li>
         <li>Which questions you have already seen, so they are not shown again.</li>
-        <li>Which option you selected for each question.</li>
-        <li>Your app settings.</li>
+        <li>Your medals and app settings, including the language you chose.</li>
     </ul>
-    <p>Your personal answer history exists only on your device. We cannot read it, retrieve it, or restore it.</p>
+    <p><strong>Your individual choices are not recorded anywhere — not even on your phone.</strong> When you answer, the app takes the share of people who picked the same option, turns it into a number, and adds that number to your Drift Level. The option itself is not written down.</p>
 
     <h2>4. What is stored on our server</h2>
-    <p>Our server holds the questions themselves and <strong>anonymous counters</strong> — how many people in total selected each option. When you answer, one number goes up by one.</p>
+    <p>Our server holds:</p>
+    <ul>
+        <li><strong>The questions themselves</strong> and their translations.</li>
+        <li><strong>Anonymous counters</strong> — how many people in total selected each option. When you answer, one number goes up by one.</li>
+        <li><strong>The fact that a device answered a particular question</strong>, with the time and whether it was skipped. This is what prevents answering twice and what makes the daily limit possible.</li>
+        <li><strong>A record of the device</strong>: its random identifier, when it first and last appeared, how many questions it has been through, the interface language, and whether a purchase is active.</li>
+        <li><strong>Medals</strong> awarded for being among the first three to answer a question.</li>
+        <li><strong>Weekly snapshots</strong> of the counters, so the history of how opinions shift is not overwritten.</li>
+    </ul>
     <p>We deliberately do not store a record connecting your identifier to the option you chose. Such a record does not exist anywhere in our system. We know that 6,412 people chose a particular answer; we have no way of knowing which devices they were.</p>
 
-    <h2>5. IP addresses and logs</h2>
-    <p>Like any internet service, our server receives a connection from your device. <strong>We do not log or store IP addresses.</strong> Our hosting provider may process connection data transiently for basic infrastructure protection, but we neither retain it nor use it to identify anyone.</p>
+    <h2>5. Suggesting a question</h2>
+    <p>VIP users can suggest one question a day. The text you write is stored on our server together with the identifier of the device that sent it, so the daily limit can be enforced.</p>
+    <p>Suggestions go to the developer's inbox. They are <strong>never published, never shown to other users</strong>, and never appear in the app.</p>
+    <p>This is the only place in the app where you can type free text. Please do not write anything about yourself or anyone else in it — a suggestion should be a question, not personal information.</p>
 
-    <h2>6. No third-party services</h2>
+    <h2>6. Protecting the statistics</h2>
+    <p>Because the statistics are the whole point of the app, we watch for automated abuse. If a device answers unrealistically fast over a long run, an entry is written to an internal log with the device identifier and the timing involved. A person then looks at it and decides whether to block that identifier.</p>
+    <p>No personal data is involved: the log records <strong>how fast</strong> answers arrived, never <strong>what</strong> was answered.</p>
+
+    <h2>7. IP addresses and logs</h2>
+    <p>Like any internet service, our server receives a connection from your device. <strong>We do not log or store IP addresses ourselves</strong> and never use them to identify anyone.</p>
+    <p>Our hosting provider processes connection data, including IP addresses, as part of running and protecting the infrastructure, under its own terms. We do not have access to it in a form linked to your activity in the app.</p>
+
+    <h2>8. No third-party services</h2>
     <p><strong>We use no analytics, no crash reporting, no advertising networks, and no third-party trackers.</strong> No SDK inside the app reports your behaviour to anyone. This is unusual, and it is deliberate: an application built on anonymity should not quietly hand your activity to someone else.</p>
     <p>It also means we cannot see how you use the app. If something breaks, we will only know if you tell us.</p>
 
-    <h2>7. Device backups</h2>
+    <h2>9. Device backups</h2>
     <p>If you have iCloud Backup or Google Backup enabled, a copy of the app's data may be stored in <strong>your own cloud account</strong>, under Apple's or Google's terms, and restored if you reinstall or change your phone. This is a feature of your device, not of our service. We have no access to that backup and cannot read it.</p>
 
-    <h2>8. Purchases</h2>
-    <p>If paid features are offered in the future, payment is handled entirely by Apple or Google. We never see your card details, billing address, or name. We only receive confirmation from the store that a purchase is valid.</p>
+    <h2>10. Purchases</h2>
+    <p>UNDERMASK VIP is a one-time purchase. Payment is handled entirely by Apple or Google. <strong>We never see your card details, billing address, or name.</strong></p>
+    <p>When you buy, your device sends us the transaction identifier issued by the store. Our server asks Apple whether that transaction is genuine, and if it is, records against your device identifier that a purchase is active. That flag is all we keep — no payment data of any kind reaches us.</p>
+    <p>The purchase belongs to your store account, not to your device. If you reinstall the app or change phones, the store restores it.</p>
 
-    <h2>9. Children</h2>
-    <p>UNDERMASK is not directed at children under 13. Since we collect no personal data from anyone, we hold no personal data belonging to children either.</p>
+    <h2>11. Children</h2>
+    <p>UNDERMASK is rated 13+ and is not directed at children under 13. Since we collect no personal data from anyone, we hold no personal data belonging to children either.</p>
 
-    <h2>10. Your rights</h2>
+    <h2>12. Your rights</h2>
     <p>Data protection law gives you rights to access, correct, or delete your personal data. In our case these rights have an unusual answer: <strong>we hold no personal data about you to access, correct, or delete.</strong></p>
     <p>You are always in full control of what does exist:</p>
     <ul>
@@ -245,11 +265,12 @@ body.clickable-hover #custom-cursor {
         <li><strong>Deleting the app</strong> removes your local data from the device. If a cloud backup exists in your Apple or Google account, you can delete it through your device settings.</li>
     </ul>
     <p>Note that answers already counted remain part of the anonymous totals. They are not personal data — they cannot be traced back to you, and there is nothing in them to identify.</p>
+    <p>The same is true of what the server holds against your device identifier: it is a random string with nothing personal attached to it, and once you delete the app, nothing on your phone points to it either.</p>
 
-    <h2>11. Changes to this policy</h2>
+    <h2>13. Changes to this policy</h2>
     <p>If this policy changes, the updated version will be published on this page with a new date. If a change ever affects what we collect, we will say so plainly rather than quietly editing the text.</p>
 
-    <h2>12. Contact</h2>
+    <h2>14. Contact</h2>
     <p>Questions about privacy: <a class="inline" href="mailto:support@undermask.app" onmouseenter="addHover()" onmouseleave="removeHover()">support@undermask.app</a></p>
     <p>Data controller: Individual Entrepreneur Andrei Akentev (NNCNC Lab).</p>
 
