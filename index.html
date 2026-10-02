@@ -33,7 +33,8 @@ html, body {
 .grid-layout {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 80px 1fr auto;
+    /* шапка, основная часть, блок скачивания, подвал */
+    grid-template-rows: 80px 1fr auto auto;
     min-height: calc(100vh - 80px);
     border: 1px solid rgba(255, 255, 255, 0.04);
     margin: 24px;
@@ -133,6 +134,79 @@ main {
     line-height: 1.6;
     max-width: 620px;
 }
+
+/* ── Блок скачивания ── */
+.get-app {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    padding: 56px 80px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+.get-app-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+}
+.section-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E583EA;
+}
+.get-app h2 {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+    line-height: 1.05;
+    color: #C69DC8;
+    text-transform: uppercase;
+}
+.store-link {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(229, 131, 234, 0.35);
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.store-link:hover {
+    color: #E583EA;
+    border-bottom-color: #E583EA;
+}
+.get-app-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+/* Светлая подложка: тёмные модули на светлом фоне читает любая камера.
+   Инвертированный код на чёрном сканируется не везде. */
+.qr {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 10px;
+    line-height: 0;
+}
+.qr canvas, .qr img {
+    display: block;
+    width: 156px;
+    height: 156px;
+}
+.qr-hint {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.3);
+}
+.store-badge img {
+    display: block;
+    height: 44px;
+    width: auto;
+}
+
 footer {
     display: flex;
     flex-direction: column;
@@ -226,13 +300,24 @@ body.clickable-hover #custom-cursor {
         max-width: 320px;
         max-height: none;
     }
+    .get-app {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 32px;
+    }
+    .get-app-qr {
+        align-items: flex-start;
+    }
 }
 @media (max-width: 768px) {
     * { cursor: auto; }
     #custom-cursor { display: none; }
-    .grid-layout { margin: 12px; grid-template-rows: 64px 1fr auto; min-height: auto; }
+    .grid-layout { margin: 12px; grid-template-rows: 64px 1fr auto auto; min-height: auto; }
     header { padding: 0 20px; }
     main { padding: 48px 24px; }
+    .get-app { padding: 40px 24px; }
+    /* QR на телефоне не нужен: экран телефона телефоном не сканируют */
+    .qr, .qr-hint { display: none; }
     footer { padding: 24px 20px; }
     .logo { margin-bottom: 32px; }
     .footer-top { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -277,11 +362,12 @@ body.clickable-hover #custom-cursor {
         <div class="get-app-text">
           <div class="section-label">Available now</div>
           <h2>Free on the<br>App Store.</h2>
-          <a class="store-link" href="https://apps.apple.com/app/id6808987002">Download for iPhone →</a>
+          <a class="store-link" href="https://apps.apple.com/app/id6809229221" onmouseenter="addHover()" onmouseleave="removeHover()">Download for iPhone →</a>
         </div>
         <div class="get-app-qr">
-          <img class="qr" src="/img/qrcode.png" alt="QR code linking to UNDERMASK on the App Store">
-          <a class="store-badge" href="https://apps.apple.com/app/id6808987002">
+          <div class="qr" id="qr" role="img" aria-label="QR code linking to UNDERMASK on the App Store"></div>
+          <div class="qr-hint">Scan with your iPhone camera</div>
+          <a class="store-badge" href="https://apps.apple.com/app/id6809229221" onmouseenter="addHover()" onmouseleave="removeHover()">
             <img src="/img/app-store-badge.svg" alt="Download on the App Store">
           </a>
         </div>
@@ -299,6 +385,7 @@ body.clickable-hover #custom-cursor {
 
     
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 const cursor = document.getElementById('custom-cursor');
 document.addEventListener('mousemove', (e) => {
@@ -307,6 +394,20 @@ document.addEventListener('mousemove', (e) => {
 });
 function addHover() { document.body.classList.add('clickable-hover'); }
 function removeHover() { document.body.classList.remove('clickable-hover'); }
+
+// QR рисуется прямо на странице из ссылки. Поменяется ссылка —
+// поменяется и код, отдельный файл перегенерировать не нужно.
+const APP_URL = 'https://apps.apple.com/app/id6809229221';
+if (window.QRCode) {
+    new QRCode(document.getElementById('qr'), {
+        text: APP_URL,
+        width: 312,          // рисуем вдвое крупнее и ужимаем стилем — чётко на ретине
+        height: 312,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M,
+    });
+}
 </script>
 </body>
 </html>
