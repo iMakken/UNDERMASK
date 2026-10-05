@@ -34,7 +34,7 @@ html, body {
     display: grid;
     grid-template-columns: 1fr;
     /* шапка, основная часть, блок скачивания, подвал */
-    grid-template-rows: 80px 1fr auto auto;
+    grid-template-rows: 80px 1fr auto auto auto;
     min-height: calc(100vh - 80px);
     border: 1px solid rgba(255, 255, 255, 0.04);
     margin: 24px;
@@ -207,6 +207,32 @@ main {
     width: auto;
 }
 
+.about {
+    padding: 80px 80px 72px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    max-width: 820px;
+}
+.about h2 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #E583EA;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+.about p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.45);
+}
+.about p + p {
+    margin-top: 16px;
+}
+.about .about-sign {
+    margin-top: 28px;
+    color: #C69DC8;
+}
+    
 footer {
     display: flex;
     flex-direction: column;
@@ -308,6 +334,8 @@ body.clickable-hover #custom-cursor {
     .get-app-qr {
         align-items: flex-start;
     }
+
+    .about { padding: 56px 24px 48px; }
 }
 @media (max-width: 768px) {
     * { cursor: auto; }
@@ -373,6 +401,26 @@ body.clickable-hover #custom-cursor {
         </div>
     </section>
 
+<section class="about">
+    <h2>Why I made this</h2>
+    <p>
+        I got tired of social media. Not of people — of the way everyone there is playing a part, just a little. Photos get picked, words get weighed, opinions get adjusted to how they'll look. At some point I realized I barely knew what people actually think. Or what I think myself, compared to everyone else.
+    </p>
+    <p>
+        I've always been curious how ordinary I am. How many people also snooze their alarm three times? Is there anyone else who starts their pizza from the crust? Small things — but they add up to a picture: where you stand among everyone.
+    </p>
+    <p>
+        That's how UNDERMASK came about. No account, no name, no profile, no followers. Nothing to show off, no one to perform for. You answer blindly — and only then see how everyone else answered. Under a mask, there's no reason to lie.
+    </p>
+    <p>
+        I deliberately collect nothing about you: no name, no email, no age. Not because it's fashionable, but because otherwise the whole thing loses its point. An honest answer is only possible where no one can see you.
+    </p>
+    <p>
+        And the thing I believe most: there is no right answer here. With the majority or in that 8% — it's not a verdict, just your place on the map. You're not a statistic. You're a person.
+    </p>
+    <p class="about-sign">— Andrei, creator of UNDERMASK</p>
+</section>
+    
 <footer>
     <div class="footer-top">
         <div class="credits">Designed and coded by iMakken © 2026 NNCNC Lab · Individual Entrepreneur Andrei Akentev. All rights reserved.</div>
