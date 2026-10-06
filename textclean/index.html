@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="/favicon_undermask.png" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Terms of Use for UNDERMASK Text Clean.">
+<meta name="theme-color" content="#000000">
+<title>Terms of Use — UNDERMASK Text Clean</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none;
+}
+html, body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+}
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 80px 1fr auto;
+    min-height: calc(100vh - 48px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    margin: 24px;
+    position: relative;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+}
+.header-logo {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    letter-spacing: 0;
+}
+.header-logo .u { color: #7FBDB6; }
+.header-logo .m { color: #2EE6CF; }
+.header-logo .p { color: rgba(255, 255, 255, 0.3); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.2em; margin-left: 12px; }
+.back-link {
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.back-link:hover { color: #2EE6CF; }
+
+main {
+    padding: 60px 80px 80px;
+    max-width: 820px;
+}
+h1 {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    line-height: 1.05;
+    color: #7FBDB6;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+.meta {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+.lede {
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    line-height: 1.55;
+    color: #ffffff;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+h2 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #2EE6CF;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 48px 0 16px 0;
+}
+p, li {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.75;
+}
+p + p { margin-top: 14px; }
+ul { margin: 16px 0 0 20px; }
+li + li { margin-top: 12px; }
+strong {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+}
+a.inline {
+    color: #2EE6CF;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(46, 230, 207, 0.35);
+    transition: border-color 0.2s ease;
+}
+a.inline:hover { border-bottom-color: #2EE6CF; }
+
+.callout {
+    border: 1px solid rgba(46, 230, 207, 0.25);
+    padding: 24px 28px;
+    margin: 40px 0 0;
+}
+.callout p { color: rgba(255, 255, 255, 0.6); }
+
+footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.05em;
+}
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.credits { color: rgba(255, 255, 255, 0.5); }
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+.footer-link {
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+}
+.footer-link:hover { color: #2EE6CF; }
+
+#custom-cursor {
+    width: 10px;
+    height: 10px;
+    background-color: #2EE6CF;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: width 0.12s, height 0.12s;
+}
+body.clickable-hover #custom-cursor {
+    width: 24px;
+    height: 24px;
+    background-color: #ffffff;
+}
+@media (max-width: 768px) {
+    * { cursor: auto; }
+    #custom-cursor { display: none; }
+    .grid-layout { margin: 12px; grid-template-rows: 64px 1fr auto; min-height: auto; }
+    header { padding: 0 20px; }
+    main { padding: 40px 24px 60px; }
+    footer { padding: 24px 20px; }
+    .footer-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-right { gap: 20px; }
+    .callout { padding: 20px; }
+}
+
+.hero-title { font-size: clamp(2.6rem, 8vw, 5.2rem); margin-bottom: 28px; }
+.hero-title .u { color: #7FBDB6; }
+.hero-title .m { color: #2EE6CF; }
+.badge { display: inline-block; margin-top: 36px; }
+.badge img { height: 48px; display: block; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+.step, .card { border: 1px solid rgba(255, 255, 255, 0.08); padding: 24px; }
+.step .num { font-family: 'Dela Gothic One', sans-serif; font-size: 1.6rem; color: #2EE6CF; margin-bottom: 12px; }
+.step p { font-size: 0.9rem; }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+.card.pro { border-color: rgba(46, 230, 207, 0.35); }
+.card h3 { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255, 255, 255, 0.85); margin-bottom: 4px; }
+.card .price { font-size: 0.85rem; color: #2EE6CF; margin-bottom: 12px; }
+.card ul { margin-top: 8px; }
+@media (max-width: 768px) {
+    .steps, .cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div id="custom-cursor"></div>
+<div class="grid-layout">
+
+<header>
+    <a class="header-logo" href="/textclean" onmouseenter="addHover()" onmouseleave="removeHover()"><span class="u">UNDER</span><span class="m">MASK</span><span class="p">TEXT CLEAN</span></a>
+    <a class="back-link" href="/" onmouseenter="addHover()" onmouseleave="removeHover()">← BACK TO SITE</a>
+</header>
+
+<main>
+    <h1>Terms of Use</h1>
+
+    <p class="meta">
+        Last updated: 6 October 2026<br>
+        Applies to the UNDERMASK Text Clean mobile application<br>
+        UNDERMASK Text Clean is developed by Individual Entrepreneur Andrei Akentev, operating as NNCNC Lab.
+    </p>
+
+    <p class="lede">
+        UNDERMASK Text Clean is a small utility. It removes hidden characters and formatting leftovers from text, on your phone. That is all it promises.
+    </p>
+
+    <h2>1. What this app is</h2>
+    <p>Text Clean removes invisible characters, non-standard spaces, extra whitespace and, if you choose, formatting such as Markdown from text you paste into it. All processing happens on your device.</p>
+
+    <h2>2. What it does not do</h2>
+    <p><strong>Text Clean does not rewrite your text</strong> and does not remove statistical watermarks that some AI models build into their choice of words. It makes no promise about how any AI detector, teacher, employer, or platform will treat the cleaned text.</p>
+    <p>You are responsible for how you use the text, including any rules on AI-generated content that apply at your school, workplace, or on the platforms where you post it.</p>
+
+    <h2>3. Results</h2>
+    <p>The app is designed to remove only characters you cannot see and formatting you choose to remove. Still, please <strong>read the cleaned text before you rely on it</strong>. In some writing systems invisible joining characters carry meaning, and removing them can change how words are displayed. The original stays in the input field until you clear it.</p>
+
+    <h2>4. Free use</h2>
+    <p>The free version allows <strong>5 cleans a day</strong> for texts of up to <strong>10,000 characters</strong>. Cleaning text that is already clean does not use up a free clean. The count is kept on your device and resets daily.</p>
+
+    <h2>5. Purchases</h2>
+    <p>Text Clean Pro is a <strong>one-time purchase, not a subscription</strong>. There is nothing to renew and nothing to cancel.</p>
+    <p>It unlocks:</p>
+    <ul>
+        <li>unlimited cleans of any length;</li>
+        <li>extra cleaning rules: Markdown, curly quotes, long dashes, ellipsis;</li>
+        <li>saving the cleaned text as a .txt file.</li>
+    </ul>
+    <p>Payment is handled by Apple or Google. The purchase is tied to your store account, so reinstalling the app or changing phones does not take it away — use <strong>Restore purchase</strong> in Settings.</p>
+    <p>Refunds are handled by the store under its own rules, not by us. We cannot issue or refuse a refund; if you want one, request it through Apple or Google.</p>
+    <p>What Pro unlocks may be extended over time. If something is ever removed, it will not be removed from people who have already paid.</p>
+
+    <h2>6. Your data</h2>
+    <p>There are no accounts, and your text never leaves your device. Details are in the <a class="inline" href="/textclean/privacy" onmouseenter="addHover()" onmouseleave="removeHover()">Privacy Policy</a>.</p>
+
+    <h2>7. Availability</h2>
+    <p>The app is provided as is. It may change, and may one day stop being updated. It is made by one person, and no continuity is guaranteed.</p>
+
+    <h2>8. Liability</h2>
+    <p>To the extent permitted by law, the developer is not liable for any loss arising from the use of the app or of text cleaned with it.</p>
+
+    <h2>9. Age</h2>
+    <p>The app is rated 4+.</p>
+
+    <h2>10. Changes</h2>
+    <p>These terms may change. The current version always lives on this page with its date.</p>
+
+    <h2>11. Contact</h2>
+    <p><a class="inline" href="mailto:support@undermask.app" onmouseenter="addHover()" onmouseleave="removeHover()">support@undermask.app</a></p>
+
+    <div class="callout">
+        <p><strong>In short:</strong> the app cleans what you cannot see. What you do with the text is up to you.</p>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-top">
+        <div class="credits">Designed and coded by iMakken © 2026 NNCNC Lab · Individual Entrepreneur Andrei Akentev. All rights reserved.</div>
+        <div class="footer-right">
+            <a href="/textclean/privacy" class="footer-link" onmouseenter="addHover()" onmouseleave="removeHover()">PRIVACY POLICY</a>
+        </div>
+    </div>
+</footer>
+
+</div>
+<script>
+const cursor = document.getElementById('custom-cursor');
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
+function addHover() { document.body.classList.add('clickable-hover'); }
+function removeHover() { document.body.classList.remove('clickable-hover'); }
+</script>
+</body>
+</html>
