@@ -185,7 +185,13 @@ main { max-width: none; }
 .hero-image { width: clamp(220px, 26vw, 360px); display: block; border-radius: 22%; box-shadow: 0 0 80px rgba(46, 230, 207, 0.18); }
 .hero-title .u { color: #7FBDB6; }
 .hero-title .m { color: #2EE6CF; }
-.badge { display: inline-block; margin-top: 36px; text-decoration: none; }
+.badge { display: inline-block; text-decoration: none; }
+.get-app { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
+.get-app-side { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+/* Светлая подложка: тёмный код на светлом фоне читает любая камера */
+.qr { background: #ffffff; padding: 8px; border-radius: 10px; line-height: 0; flex-shrink: 0; }
+.qr img { display: block; width: 120px; height: 120px; }
+.qr-hint { font-size: 11px; letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.3); }
 ul + p { margin-top: 16px; }
 .badge img { height: 48px; display: block; }
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
@@ -203,6 +209,8 @@ ul + p { margin-top: 16px; }
 }
 @media (max-width: 768px) {
     .steps, .cards { grid-template-columns: 1fr; }
+    /* QR на телефоне не нужен: экран телефона телефоном не сканируют */
+    .qr, .qr-hint { display: none; }
 }
 </style>
 </head>
@@ -221,8 +229,13 @@ ul + p { margin-top: 16px; }
             <h1 class="hero-title"><span class="u">TEXT</span> <span class="m">CLEAN</span></h1>
             <p class="hero-sub">Clean what you can't see.</p>
             <p class="hero-desc">AI chats leave invisible characters and formatting leftovers in the text you copy. Text Clean finds them and removes them in one tap — right on your phone.</p>
-            <!-- TODO: replace # with the App Store link once the app is live -->
-            <a class="badge" href="#" onmouseenter="addHover()" onmouseleave="removeHover()"><img src="/img/app-store-badge.svg" alt="Download on the App Store"></a>
+            <div class="get-app">
+                <div class="qr"><img src="/textclean/img/QR_UM_TextClean_appstore.png" alt="QR code linking to UNDERMASK Text Clean on the App Store"></div>
+                <div class="get-app-side">
+                    <a class="badge" href="https://apps.apple.com/us/app/undermask-text-clean/id6819613074" onmouseenter="addHover()" onmouseleave="removeHover()"><img src="/img/app-store-badge.svg" alt="Download on the App Store"></a>
+                    <div class="qr-hint">Scan with your iPhone camera</div>
+                </div>
+            </div>
         </div>
         <img class="hero-image" src="/textclean/img/app_icon.png" alt="UNDERMASK Text Clean app icon">
     </div>
