@@ -245,6 +245,31 @@ footer { font-size: 12px; letter-spacing: 0; }
 @media (max-width: 768px) {
     h2 { margin-top: 56px; }
 }
+/* ── Try it ── */
+.try-lead { max-width: 640px; margin-bottom: 20px; }
+.try-box { background: #111113; border-radius: 18px; padding: 20px; }
+.try-box textarea { width: 100%; min-height: 180px; background: transparent; border: none; outline: none; resize: vertical; color: #f5f5f7; font: inherit; font-size: 1.05rem; line-height: 1.5; }
+.try-box textarea::placeholder { color: #6e6e73; }
+.try-bar { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.9rem; color: #a1a1a6; }
+.try-status b { color: #2EE6CF; font-weight: 600; }
+.try-count { flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.try-count.over, .try-status .over { color: #ff9f0a; }
+.try-actions { display: flex; align-items: center; gap: 16px; margin-top: 16px; }
+.btn-primary { background: #2EE6CF; color: #000; border: none; border-radius: 980px; padding: 12px 30px; font: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; }
+.btn-primary:disabled { opacity: 0.35; cursor: default; }
+.btn-ghost, .btn-link { background: none; border: none; color: #2EE6CF; font: inherit; font-size: 1rem; cursor: pointer; padding: 8px 2px; }
+.btn-link { font-size: 0.9rem; font-weight: 500; padding: 0; }
+.try-result { margin-top: 28px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: #111113; border-radius: 980px; padding: 6px 14px; font-size: 0.85rem; color: #a1a1a6; }
+.chip b { color: #2EE6CF; font-weight: 600; }
+.pane-label { display: flex; justify-content: space-between; align-items: center; margin: 24px 0 10px; font-size: 0.95rem; font-weight: 600; color: #f5f5f7; }
+.pane { background: #111113; border-radius: 18px; padding: 20px; white-space: pre-wrap; word-break: break-word; font-size: 1rem; line-height: 1.7; color: #f5f5f7; max-height: 360px; overflow: auto; }
+mark.hid { background: rgba(46, 230, 207, 0.14); color: #2EE6CF; border: 1px solid rgba(46, 230, 207, 0.5); border-radius: 6px; padding: 0 5px; margin: 0 1px; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.03em; vertical-align: 1px; white-space: nowrap; }
+.try-upsell { margin-top: 20px; }
+@media (max-width: 768px) {
+    .try-bar { flex-direction: column; gap: 4px; }
+}
 </style>
 </head>
 <body>
@@ -274,6 +299,32 @@ footer { font-size: 12px; letter-spacing: 0; }
     </div>
 
     <div class="content">
+
+    <section class="try" id="try">
+        <h2>Try it right here</h2>
+        <p class="try-lead">Paste text from an AI chat and see what's hiding in it. It runs in your browser — nothing is sent anywhere.</p>
+        <div class="try-box">
+            <textarea id="tc-input" placeholder="Paste text here…" spellcheck="false" aria-label="Text to clean"></textarea>
+            <div class="try-bar">
+                <span id="tc-status" class="try-status">Paste text to check it</span>
+                <span id="tc-count" class="try-count">0 / 2,000</span>
+            </div>
+            <div class="try-actions">
+                <button id="tc-clean" class="btn-primary" disabled>Clean</button>
+                <button id="tc-sample" class="btn-ghost">Try a sample</button>
+            </div>
+        </div>
+        <div id="tc-result" class="try-result" hidden>
+            <div id="tc-chips" class="chips"></div>
+            <div id="tc-marked-wrap">
+                <div class="pane-label">Where they were hiding</div>
+                <div id="tc-marked" class="pane"></div>
+            </div>
+            <div class="pane-label">Clean text <button id="tc-copy" class="btn-link">Copy</button></div>
+            <div id="tc-output" class="pane"></div>
+            <p class="try-upsell">Markdown, curly quotes and long dashes — and texts up to 10,000 characters for free — are in the app. <a class="inline" href="https://apps.apple.com/us/app/undermask-text-clean/id6819613074">Get it on the App Store →</a></p>
+        </div>
+    </section>
 
     <h2>How it works</h2>
     <div class="steps">
@@ -353,6 +404,160 @@ document.addEventListener('mousemove', (e) => {
 });
 function addHover() { document.body.classList.add('clickable-hover'); }
 function removeHover() { document.body.classList.remove('clickable-hover'); }
+</script>
+<script>
+// UNDERMASK Text Clean — web demo engine. Base rules only.
+// Mirrors packages/undermask_cleaner (Dart). Keep the two in sync when rules change.
+const TC = (() => {
+  const CAT = {
+    zeroWidth: 'Zero-width characters',
+    softHyphen: 'Soft hyphens',
+    unicodeTag: 'Hidden tag characters',
+    bidiControl: 'Text direction controls',
+    variationSelector: 'Variation selectors',
+    unusualSpace: 'Non-standard spaces',
+    whitespace: 'Extra whitespace',
+  };
+  const HIDDEN = new Set(['zeroWidth', 'softHyphen', 'unicodeTag', 'bidiControl', 'variationSelector', 'unusualSpace']);
+  const R = (s, e, cat, rep) => ({ s, e, cat, rep });
+  const RULES = [
+    R(0x200B, 0x200D, 'zeroWidth'), R(0x2060, 0x2064, 'zeroWidth'), R(0xFEFF, 0xFEFF, 'zeroWidth'), R(0x180E, 0x180E, 'zeroWidth'),
+    R(0x00AD, 0x00AD, 'softHyphen'),
+    R(0xE0000, 0xE007F, 'unicodeTag'),
+    R(0x200E, 0x200F, 'bidiControl'), R(0x061C, 0x061C, 'bidiControl'), R(0x202A, 0x202E, 'bidiControl'), R(0x2066, 0x2069, 'bidiControl'),
+    R(0xFE00, 0xFE0F, 'variationSelector'), R(0xE0100, 0xE01EF, 'variationSelector'),
+    R(0x00A0, 0x00A0, 'unusualSpace', ' '), R(0x1680, 0x1680, 'unusualSpace', ' '), R(0x2000, 0x200A, 'unusualSpace', ' '),
+    R(0x202F, 0x202F, 'unusualSpace', ' '), R(0x205F, 0x205F, 'unusualSpace', ' '), R(0x3000, 0x3000, 'unusualSpace', ' '),
+  ];
+  const ruleFor = cp => RULES.find(r => cp >= r.s && cp <= r.e) || null;
+
+  const isPict = cp => cp == 0xA9 || cp == 0xAE || cp == 0x203C || cp == 0x2049 || cp == 0x2122 || cp == 0x2139 ||
+    (cp >= 0x2194 && cp <= 0x21AA) || (cp >= 0x231A && cp <= 0x23FF) || cp == 0x24C2 || (cp >= 0x25AA && cp <= 0x25FE) ||
+    (cp >= 0x2600 && cp <= 0x27BF) || (cp >= 0x2934 && cp <= 0x2935) || (cp >= 0x2B05 && cp <= 0x2B55) ||
+    cp == 0x3030 || cp == 0x303D || cp == 0x3297 || cp == 0x3299 || (cp >= 0x1F000 && cp <= 0x1FAFF);
+
+  // Grapheme clusters: Intl.Segmenter where available, simple emoji-aware fallback otherwise.
+  const seg = (typeof Intl !== 'undefined' && Intl.Segmenter) ? new Intl.Segmenter('en', { granularity: 'grapheme' }) : null;
+  function clusters(text) {
+    if (seg) return Array.from(seg.segment(text), s => s.segment);
+    const out = [];
+    let prev = 0;
+    for (const ch of text) {
+      const cp = ch.codePointAt(0);
+      const last = out.length ? out[out.length - 1] : '';
+      const lastPict = last !== '' && isPict(last.codePointAt(0));
+      const combining = cp == 0xFE0F || cp == 0x20E3 || (cp >= 0x1F3FB && cp <= 0x1F3FF);
+      const joins = last !== '' && (combining || (lastPict && (
+        prev == 0x200D || cp == 0x200D || (cp >= 0xE0020 && cp <= 0xE007F) ||
+        (cp >= 0x1F1E6 && cp <= 0x1F1FF && prev >= 0x1F1E6 && prev <= 0x1F1FF && [...last].length == 1)
+      )));
+      if (joins) out[out.length - 1] += ch; else out.push(ch);
+      prev = cp;
+    }
+    return out;
+  }
+
+  function clean(input) {
+    const counts = {};
+    const add = (c, n = 1) => { if (n > 0) counts[c] = (counts[c] || 0) + n; };
+    const findings = []; // {offset, length, cat} in the ORIGINAL input (UTF-16 units)
+    let out = '', offset = 0;
+    for (const cl of clusters(input)) {
+      const runes = Array.from(cl, c => c.codePointAt(0));
+      const emoji = isPict(runes[0]) || runes.includes(0x20E3);
+      const keepTags = emoji && runes.length > 2 && runes[0] == 0x1F3F4 && runes[runes.length - 1] == 0xE007F;
+      let pos = offset;
+      for (const cp of runes) {
+        const w = cp > 0xFFFF ? 2 : 1;
+        const strippable = (cp >= 0xE0100 && cp <= 0xE01EF) || (!keepTags && cp >= 0xE0000 && cp <= 0xE007F);
+        const rule = emoji && !strippable ? null : ruleFor(cp);
+        if (!rule) out += String.fromCodePoint(cp);
+        else { add(rule.cat); findings.push({ offset: pos, length: w, cat: rule.cat }); if (rule.rep != null) out += rule.rep; }
+        pos += w;
+      }
+      offset += cl.length;
+    }
+    let t = out.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    let n = 0;
+    t = t.replace(/[ \t]+$/gm, () => { n++; return ''; });
+    t = t.replace(/\n{3,}/g, () => { n++; return '\n\n'; });
+    t = t.replace(/^\n+|\n+$/g, '');
+    add('whitespace', n);
+    const hidden = Object.entries(counts).filter(([c]) => HIDDEN.has(c)).reduce((a, [, v]) => a + v, 0);
+    const total = Object.values(counts).reduce((a, v) => a + v, 0);
+    return { text: t, counts, findings, hidden, total };
+  }
+
+  return { clean, CAT };
+})();
+
+(() => {
+  const LIMIT = 2000;
+  const $ = id => document.getElementById(id);
+  const input = $('tc-input'), status = $('tc-status'), count = $('tc-count'), btn = $('tc-clean');
+  const result = $('tc-result'), chips = $('tc-chips'), marked = $('tc-marked'), markedWrap = $('tc-marked-wrap');
+  const output = $('tc-output'), copyBtn = $('tc-copy');
+  const fmt = n => n.toLocaleString('en-US');
+  const esc = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const SHORT = { zeroWidth: 'ZW', softHyphen: 'SHY', unicodeTag: 'TAG', bidiControl: 'DIR', variationSelector: 'VS', unusualSpace: 'SP' };
+  const SAMPLE = 'Here\u2019s a quick summary of the meeting:\u200B\n\nThe team agreed\u00A0to move the launch\u2060 to Friday.\u200D Marketing will\u202Fprepare the post,\u200B and design\u00AD will update the banner.  \n\n\n\nNext check-in:\u00A0Monday.\u{E0041}\u{E0049}';
+
+  function update() {
+    const text = input.value;
+    count.textContent = fmt(text.length) + ' / ' + fmt(LIMIT);
+    count.classList.toggle('over', text.length > LIMIT);
+    result.hidden = true;
+    if (!text) { status.textContent = 'Paste text to check it'; btn.disabled = true; return; }
+    if (text.length > LIMIT) {
+      status.innerHTML = '<span class="over">Over 2,000 characters.</span> The app cleans up to 10,000 for free.';
+      btn.disabled = true; return;
+    }
+    const r = TC.clean(text);
+    status.innerHTML = r.hidden === 1 ? '<b>1</b> hidden character found'
+      : r.hidden > 1 ? '<b>' + r.hidden + '</b> hidden characters found'
+      : r.total > 0 ? 'Some formatting to tidy up' : 'No hidden characters';
+    btn.disabled = false;
+  }
+
+  function markUp(text, findings) {
+    let html = '', pos = 0;
+    for (let i = 0; i < findings.length; ) {
+      const f = findings[i];
+      let n = 1, end = f.offset + f.length;
+      while (i + n < findings.length && findings[i + n].cat === f.cat && findings[i + n].offset === end) { end += findings[i + n].length; n++; }
+      html += esc(text.slice(pos, f.offset));
+      html += '<mark class="hid" title="' + TC.CAT[f.cat] + (n > 1 ? ' ×' + n : '') + '">' + SHORT[f.cat] + (n > 1 ? '×' + n : '') + '</mark>';
+      pos = end; i += n;
+    }
+    return html + esc(text.slice(pos));
+  }
+
+  btn.addEventListener('click', () => {
+    const text = input.value;
+    if (!text || text.length > LIMIT) return;
+    const r = TC.clean(text);
+    const entries = Object.entries(r.counts);
+    chips.innerHTML = entries.length
+      ? entries.map(([c, v]) => '<span class="chip">' + TC.CAT[c] + ' <b>' + v + '</b></span>').join('')
+      : '<span class="chip">Already clean — nothing to fix</span>';
+    markedWrap.hidden = r.findings.length === 0;
+    marked.innerHTML = markUp(text, r.findings);
+    output.textContent = r.text;
+    copyBtn.textContent = 'Copy';
+    result.hidden = false;
+  });
+
+  copyBtn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(output.textContent); copyBtn.textContent = 'Copied'; }
+    catch (e) { copyBtn.textContent = 'Select and copy manually'; }
+  });
+
+  $('tc-sample').addEventListener('click', () => {
+    input.value = SAMPLE; update(); btn.click();
+  });
+
+  input.addEventListener('input', update);
+})();
 </script>
 </body>
 </html>
