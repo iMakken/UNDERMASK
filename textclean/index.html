@@ -302,7 +302,7 @@ mark.hid { background: rgba(46, 230, 207, 0.14); color: #2EE6CF; border: 1px sol
 
     <section class="try" id="try">
         <h2>Try it right here</h2>
-        <p class="try-lead">Paste text from an AI chat and see what's hiding in it. It runs in your browser — nothing is sent anywhere.</p>
+        <p class="try-lead">Paste text from an AI chat: Text Clean strips leftover Markdown — **asterisks**, # headings, list dashes — and shows any hidden characters. It runs in your browser, nothing is sent anywhere.</p>
         <div class="try-box">
             <textarea id="tc-input" placeholder="Paste text here…" spellcheck="false" aria-label="Text to clean"></textarea>
             <div class="try-bar">
@@ -322,7 +322,7 @@ mark.hid { background: rgba(46, 230, 207, 0.14); color: #2EE6CF; border: 1px sol
             </div>
             <div class="pane-label">Clean text <button id="tc-copy" class="btn-link">Copy</button></div>
             <div id="tc-output" class="pane"></div>
-            <p class="try-upsell">Markdown, curly quotes and long dashes — and texts up to 10,000 characters for free — are in the app. <a class="inline" href="https://apps.apple.com/us/app/undermask-text-clean/id6819613074">Get it on the App Store →</a></p>
+            <p class="try-upsell">Texts up to 10,000 characters, curly quotes and long dashes — in the app on your iPhone. <a class="inline" href="https://apps.apple.com/us/app/undermask-text-clean/id6819613074">Get it on the App Store →</a></p>
         </div>
     </section>
 
@@ -406,7 +406,7 @@ function addHover() { document.body.classList.add('clickable-hover'); }
 function removeHover() { document.body.classList.remove('clickable-hover'); }
 </script>
 <script>
-// UNDERMASK Text Clean — web demo engine. Base rules only.
+// UNDERMASK Text Clean — web demo engine. Base rules + Markdown removal.
 // Mirrors packages/undermask_cleaner (Dart). Keep the two in sync when rules change.
 const TC = (() => {
   const CAT = {
@@ -417,6 +417,7 @@ const TC = (() => {
     variationSelector: 'Variation selectors',
     unusualSpace: 'Non-standard spaces',
     whitespace: 'Extra whitespace',
+    markdown: 'Markdown formatting',
   };
   const HIDDEN = new Set(['zeroWidth', 'softHyphen', 'unicodeTag', 'bidiControl', 'variationSelector', 'unusualSpace']);
   const R = (s, e, cat, rep) => ({ s, e, cat, rep });
@@ -457,7 +458,39 @@ const TC = (() => {
     return out;
   }
 
-  function clean(input) {
+  // Markdown → plain text (same rules as the app's "Remove Markdown").
+  function stripMarkdown(text) {
+    let count = 0;
+    const sub = (s, re, f) => s.replace(re, (...m) => { count++; return f(m); });
+    const fence = /^\s{0,3}(```|~~~)/, hr = /^\s{0,3}([-*_])(?:[ \t]*\1){2,}[ \t]*$/,
+      heading = /^\s{0,3}#{1,6}[ \t]+(.*?)(?:[ \t]+#+)?[ \t]*$/, quote = /^\s{0,3}(?:>[ \t]?)+/,
+      task = /^(\s*)[-*+][ \t]+\[[ xX]\][ \t]+/, bullet = /^(\s*)[-*+][ \t]+/, code = /`([^`]+)`/g,
+      image = /!\[([^\]]*)\]\([^)]*\)/g, link = /\[([^\]]+)\]\(([^)\s]+)(?:[ \t]+"[^"]*")?\)/g,
+      bold = /(\*\*|__)(?=\S)(.+?)(?<=\S)\1/g, strike = /~~(?=\S)(.+?)(?<=\S)~~/g,
+      iS = /(?<![*\w])\*(?=[^\s*])(.+?)(?<=[^\s*])\*(?![*\w])/g, iU = /(?<![_\w])_(?=[^\s_])(.+?)(?<=[^\s_])_(?![_\w])/g;
+    const emph = s => {
+      s = sub(s, image, m => m[1]); s = sub(s, link, m => m[1] == m[2] ? m[2] : `${m[1]} (${m[2]})`);
+      s = sub(s, bold, m => m[2]); s = sub(s, strike, m => m[1]); s = sub(s, iS, m => m[1]); s = sub(s, iU, m => m[1]);
+      return s;
+    };
+    const inline = l => {
+      let out = '', last = 0;
+      for (const m of l.matchAll(code)) { out += emph(l.slice(last, m.index)) + m[1]; count++; last = m.index + m[0].length; }
+      return out + emph(l.slice(last));
+    };
+    const out = []; let inFence = false;
+    for (let line of text.split('\n')) {
+      if (fence.test(line)) { inFence = !inFence; count++; continue; }
+      if (inFence) { out.push(line); continue; }
+      if (hr.test(line)) { count++; out.push(''); continue; }
+      line = sub(line, heading, m => m[1]); line = sub(line, quote, () => '');
+      line = sub(line, task, m => `${m[1]}• `); line = sub(line, bullet, m => `${m[1]}• `);
+      out.push(inline(line));
+    }
+    return { text: out.join('\n'), count };
+  }
+
+  function clean(input, opts = {}) {
     const counts = {};
     const add = (c, n = 1) => { if (n > 0) counts[c] = (counts[c] || 0) + n; };
     const findings = []; // {offset, length, cat} in the ORIGINAL input (UTF-16 units)
@@ -478,6 +511,7 @@ const TC = (() => {
       offset += cl.length;
     }
     let t = out.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+    if (opts.markdown) { const m = stripMarkdown(t); t = m.text; add('markdown', m.count); }
     let n = 0;
     t = t.replace(/[ \t]+$/gm, () => { n++; return ''; });
     t = t.replace(/\n{3,}/g, () => { n++; return '\n\n'; });
@@ -500,7 +534,7 @@ const TC = (() => {
   const fmt = n => n.toLocaleString('en-US');
   const esc = t => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const SHORT = { zeroWidth: 'ZW', softHyphen: 'SHY', unicodeTag: 'TAG', bidiControl: 'DIR', variationSelector: 'VS', unusualSpace: 'SP' };
-  const SAMPLE = 'Here\u2019s a quick summary of the meeting:\u200B\n\nThe team agreed\u00A0to move the launch\u2060 to Friday.\u200D Marketing will\u202Fprepare the post,\u200B and design\u00AD will update the banner.  \n\n\n\nNext check-in:\u00A0Monday.\u{E0041}\u{E0049}';
+  const SAMPLE = 'Here\u2019s a quick summary of the meeting:\u200B\n\n### Decisions\n\n- The team agreed\u00A0to move the launch\u2060 to **Friday**.\u200D\n- Marketing will\u202Fprepare the post,\u200B and design\u00AD will update the banner.  \n\n\n\n**Next check-in:**\u00A0Monday.\u{E0041}\u{E0049}';
 
   function update() {
     const text = input.value;
@@ -512,10 +546,14 @@ const TC = (() => {
       status.innerHTML = '<span class="over">Over 2,000 characters.</span> The app cleans up to 10,000 for free.';
       btn.disabled = true; return;
     }
-    const r = TC.clean(text);
-    status.innerHTML = r.hidden === 1 ? '<b>1</b> hidden character found'
-      : r.hidden > 1 ? '<b>' + r.hidden + '</b> hidden characters found'
-      : r.total > 0 ? 'Some formatting to tidy up' : 'No hidden characters';
+    const r = TC.clean(text, { markdown: true });
+    const md = r.counts.markdown || 0;
+    const parts = [];
+    if (r.hidden === 1) parts.push('<b>1</b> hidden character found');
+    else if (r.hidden > 1) parts.push('<b>' + r.hidden + '</b> hidden characters found');
+    if (md > 0) parts.push('Markdown to clean up');
+    status.innerHTML = parts.length ? parts.join(' · ')
+      : r.total > 0 ? 'Some spacing to tidy up' : 'No hidden characters or Markdown';
     btn.disabled = false;
   }
 
@@ -535,7 +573,7 @@ const TC = (() => {
   btn.addEventListener('click', () => {
     const text = input.value;
     if (!text || text.length > LIMIT) return;
-    const r = TC.clean(text);
+    const r = TC.clean(text, { markdown: true });
     const entries = Object.entries(r.counts);
     chips.innerHTML = entries.length
       ? entries.map(([c, v]) => '<span class="chip">' + TC.CAT[c] + ' <b>' + v + '</b></span>').join('')
