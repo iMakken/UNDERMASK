@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href="/favicon_undermask.png" type="image/svg+xml">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Where do you stand among everyone? Answer blindly, then see where you land. No account, no name, no trace.">
+<title>UNDERMASK - Where do you stand among everyone?</title>
+<meta name="description" content="Where do you stand among everyone? Answer blindly, then see where you land. No account, no name, no trace.">
+<meta property="og:title" content="UNDERMASK">
+<meta property="og:description" content="Where do you stand among everyone? Answer blindly, then see where you land.">
+<meta property="og:image" content="https://undermask.app/img/main.png">
+<meta property="og:url" content="https://undermask.app">
+<meta property="og:type" content="website">
+    
+<!-- Подключаем оригинальный шрифт Dela Gothic One и JetBrains Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: none; /* Интерактивный моно-курсор */
+}
+html, body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    min-height: 100vh;
+}
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* шапка, основная часть, блок скачивания, подвал */
+    grid-template-rows: 80px 1fr auto auto auto;
+    min-height: calc(100vh - 80px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    margin: 24px;
+    position: relative;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+}
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.status-dot {
+    width: 5px;
+    height: 5px;
+    background-color: #C69DC8;
+    border-radius: 50%;
+}
+.status-text {
+    color: #E583EA;
+    font-weight: 300;
+}
+.project-url {
+    color: rgba(255, 255, 255, 0.3);
+}
+/* Главная контентная область — теперь две колонки: текст слева, картинка справа */
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    padding: 60px 80px;
+    width: 100%;
+}
+.main-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 750px;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.main-right {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* object-fit: contain — картинка впишется целиком при любых пропорциях,
+   max-height не даёт ей распереть ряд сетки */
+.main-image {
+    display: block;
+    width: auto;
+    max-width: 420px;
+    max-height: 70vh;
+    height: auto;
+    object-fit: contain;
+}
+.logo {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-size: clamp(2.2rem, 7vw, 5.2rem);
+    line-height: 1.0;
+    margin-bottom: 48px;
+    text-transform: uppercase;
+}
+.logo-under {
+    color: #C69DC8;
+}
+.logo-mask {
+    color: #E583EA;
+}
+.manifesto-block {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.slogan {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    max-width: 750px;
+}
+.description {
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.6;
+    max-width: 620px;
+}
+
+/* ── Блок скачивания ── */
+.get-app {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 120px;
+    padding: 150px 100px 100px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+.get-app-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+}
+.section-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E583EA;
+}
+.get-app h2 {
+    font-family: 'Dela Gothic One', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+    line-height: 1.05;
+    color: #C69DC8;
+    text-transform: uppercase;
+}
+/* Кнопка в стиле кнопок приложения: розовая рамка, заливка 15%, скругление 12px */
+.store-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 14px 26px;
+    border: 1.4px solid #E583EA;
+    border-radius: 12px;
+    background: rgba(229, 131, 234, 0.15);
+    color: #E583EA;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.store-link:hover {
+    background: #E583EA;
+    color: #000000;
+}
+.get-app-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+/* Светлая подложка: тёмные модули на светлом фоне читает любая камера.
+   Инвертированный код на чёрном сканируется не везде. */
+.qr {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 10px;
+    line-height: 0;
+}
+.qr canvas, .qr img {
+    display: block;
+    width: 156px;
+    height: 156px;
+}
+.qr-hint {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.3);
+}
+.store-badge img {
+    display: block;
+    height: 44px;
+    width: auto;
+}
+
+.about {
+    padding: 80px 80px 72px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    max-width: 820px;
+}
+.about h2 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #E583EA;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+.about p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.45);
+}
+.about p + p {
+    margin-top: 16px;
+}
+.about .about-sign {
+    margin-top: 28px;
+    color: #C69DC8;
+}
+    
+footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 32px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.05em;
+}
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.credits {
+    color: rgba(255, 255, 255, 0.5);
+}
+#custom-cursor {
+    width: 10px;
+    height: 10px;
+    background-color: #E583EA;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: width 0.12s, height 0.12s;
+}
+body.clickable-hover #custom-cursor {
+    width: 24px;
+    height: 24px;
+    background-color: #ffffff;
+}
+.announcement-banner {
+    background-color: #111112;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+.announcement-banner a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-block;
+}
+.announcement-banner a span {
+    color: #E583EA;
+    font-weight: 600;
+}
+.announcement-banner a:hover {
+    color: #E583EA;
+}
+
+    .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+.footer-link {
+    color: rgba(255, 255, 255, 0.3);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+}
+.footer-link:hover {
+    color: #E583EA;
+}
+.footer-phase {
+    color: rgba(255, 255, 255, 0.25);
+}
+    
+    
+    /* Адаптив: на планшете/телефоне колонки складываются, картинка уходит вниз под текст */
+@media (max-width: 900px) {
+    main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 48px;
+    }
+    .main-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .main-image {
+        max-width: 320px;
+        max-height: none;
+    }
+    .get-app {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 32px;
+    }
+    .get-app-qr {
+        align-items: flex-start;
+    }
+
+    .about { padding: 56px 24px 48px; }
+}
+@media (max-width: 768px) {
+    * { cursor: auto; }
+    #custom-cursor { display: none; }
+    .grid-layout { margin: 12px; grid-template-rows: 64px 1fr auto auto; min-height: auto; }
+    header { padding: 0 20px; }
+    main { padding: 48px 24px; }
+    .get-app { padding: 40px 24px; }
+    /* QR на телефоне не нужен: экран телефона телефоном не сканируют */
+    .qr, .qr-hint { display: none; }
+    footer { padding: 24px 20px; }
+    .logo { margin-bottom: 32px; }
+    .footer-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-right { gap: 20px; }
+    .main-image { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="announcement-banner">
+    <a href="https://t.me/undermaskapp" target="_blank" rel="noopener" onmouseenter="addHover()" onmouseleave="removeHover()">
+        Released 30 September 2026. Follow raw updates on <span>Telegram →</span>
+    </a>
+</div>
+<div id="custom-cursor"></div>
+<div class="grid-layout">
+<header>
+    <div class="status-container">
+        <span class="status-dot"></span>
+        <span class="status-text">READY - IN STORE</span>
+    </div>
+    <div class="project-url">undermask.app</div>
+</header>
+<main>
+    <div class="main-left">
+        <h1 class="logo" onmouseenter="addHover()" onmouseleave="removeHover()">
+            <span class="logo-under">UNDER</span><span class="logo-mask">MASK</span>
+        </h1>
+        <div class="manifesto-block">
+            <div class="slogan">Where do you stand among everyone?</div>
+            <p class="description">
+                No account, no name, no trace — so there's no reason to lie. Answer blindly, then see where you land among everyone else.
+            </p>
+            </div>
+    </div>
+    <div class="main-right">
+        <img src="img/main.png" alt="UNDERMASK" class="main-image">
+    </div>
+</main>
+
+    <section class="get-app">
+        <div class="get-app-text">
+          <div class="section-label">Available now</div>
+          <h2>Free on the<br>App Store.</h2>
+          <a class="store-link" href="https://apps.apple.com/app/id6809229221" onmouseenter="addHover()" onmouseleave="removeHover()">Download for iPhone →</a>
+        </div>
+        <div class="get-app-qr">
+          <div class="qr" id="qr" role="img" aria-label="QR code linking to UNDERMASK on the App Store"></div>
+          <a class="store-badge" href="https://apps.apple.com/app/id6809229221" onmouseenter="addHover()" onmouseleave="removeHover()">
+            <img src="/img/app-store-badge.svg" alt="Download on the App Store">
+          </a>
+        </div>
+    </section>
+
+<section class="about">
+    <h2>Why I made this</h2>
+    <p>
+        I got tired of social media. Not of people — of the way everyone there is playing a part, just a little. Photos get picked, words get weighed, opinions get adjusted to how they'll look. At some point I realized I barely knew what people actually think. Or what I think myself, compared to everyone else.
+    </p>
+    <p>
+        I've always been curious how ordinary I am. How many people also snooze their alarm three times? Is there anyone else who starts their pizza from the crust? Small things — but they add up to a picture: where you stand among everyone.
+    </p>
+    <p>
+        That's how UNDERMASK came about. No account, no name, no profile, no followers. Nothing to show off, no one to perform for. You answer blindly — and only then see how everyone else answered. Under a mask, there's no reason to lie.
+    </p>
+    <p>
+        I deliberately collect nothing about you: no name, no email, no age. Not because it's fashionable, but because otherwise the whole thing loses its point. An honest answer is only possible where no one can see you.
+    </p>
+    <p>
+        And the thing I believe most: there is no right answer here. With the majority or in that 8% — it's not a verdict, just your place on the map. You're not a statistic. You're a person.
+    </p>
+    <p class="about-sign">— Andrei, creator of UNDERMASK</p>
+</section>
+    
+<footer>
+    <div class="footer-top">
+        <div class="credits">Designed and coded by iMakken © 2026 NNCNC Lab · Individual Entrepreneur Andrei Akentev. All rights reserved.</div>
+        <div class="footer-right">
+            <a href="/privacy" class="footer-link" onmouseenter="addHover()" onmouseleave="removeHover()">PRIVACY POLICY</a>
+            <a href="/terms" class="footer-link" onmouseenter="addHover()" onmouseleave="removeHover()">TERMS OF USE</a>
+        </div>
+    </div>
+</footer>
+
+    
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const cursor = document.getElementById('custom-cursor');
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
+function addHover() { document.body.classList.add('clickable-hover'); }
+function removeHover() { document.body.classList.remove('clickable-hover'); }
+
+// QR рисуется прямо на странице из ссылки. Поменяется ссылка —
+// поменяется и код, отдельный файл перегенерировать не нужно.
+const APP_URL = 'https://apps.apple.com/app/id6809229221';
+if (window.QRCode) {
+    new QRCode(document.getElementById('qr'), {
+        text: APP_URL,
+        width: 312,          // рисуем вдвое крупнее и ужимаем стилем — чётко на ретине
+        height: 312,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M,
+    });
+}
+</script>
+</body>
+</html>
